@@ -18,8 +18,6 @@ class ChooseComponent extends React.Component {
         );
     }
 }
-
-
 ChooseComponent.defaultProps = {
     list: [
         {
