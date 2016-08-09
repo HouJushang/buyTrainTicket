@@ -9,22 +9,16 @@ class ChooseComponent extends React.Component {
             <div id="main">
                 <Header/>
                 {this.props.params.type}
-                <div className="chooseStaion">
-                    <div className="startStaion station">
-                    </div>
-                    <div>
-                    </div>
-                    <div className="endStaion station">
-                    </div>
-                </div>
-                <input type="date" className="date"/>
-                <div className="submit">
-                    查询
-                </div>
+                <ul>
+                    {this.props.list.map(function (object, i) {
+                        return <li>{i} {object.name} </li>;
+                    })}
+                </ul>
             </div>
         );
     }
 }
+
 
 ChooseComponent.defaultProps = {
     list: [
