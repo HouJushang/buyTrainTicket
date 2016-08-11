@@ -7,11 +7,11 @@ class ChooseComponent extends React.Component {
     render() {
         return (
             <div id="main">
-                <Header/>
+                <Header title="选择车站"/>
                 {this.props.params.type}
                 <ul>
                     {this.props.list.map(function (object, i) {
-                        return <li>{i} {object.name} </li>;
+                        return <li key={i}>{object.name} </li>;
                     })}
                 </ul>
             </div>
@@ -22,15 +22,15 @@ ChooseComponent.defaultProps = {
     list: [
         {
             name: '北京',
-            code: 111
+            id: 1
         },
         {
             name: '上海',
-            code: 111
+            id: 2
         },
         {
             name: '厦门',
-            code: 111
+            id: 3
         }
     ]
 };
