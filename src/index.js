@@ -19,7 +19,7 @@ import Choose from './page/Choose.js';
 import './sass/main.sass'
 
 //reducers
-import * as reducers from './reducers'
+import * as reducers from './reducers/main.js'
 
 const reducer = combineReducers({
     ...reducers,
@@ -30,6 +30,7 @@ const store = createStore(
     reducer,
 )
 const history = syncHistoryWithStore(browserHistory, store)
+
 
 
 
