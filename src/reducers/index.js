@@ -1,15 +1,28 @@
-import { INCREASE, DECREASE } from '../constants'
+import {INCREASE, DECREASE} from '../constants'
 
 const initialState = {
+    startStaion: {
+        name: '上海',
+        code: 111
+    },
+    endStation: {
+        name: '北京',
+        code: 2222
+    },
     number: 1
 }
 
 export default function update(state = initialState, action) {
-  if(action.type === INCREASE) {
-    return { number: state.number + action.amount }
-  }
-  else if(action.type === DECREASE) {
-    return { number: state.number - action.amount }
-  }
-  return state
+    var newState = Object.assign({},state);
+    if (action.type === INCREASE) {
+        const newNumber = state.number + action.amount;
+        newState.number = newNumber
+        return newState;
+    }
+    else if (action.type === DECREASE) {
+        const newNumber = state.number - action.amount;
+        newState.number = newNumber
+        return newState;
+    }
+    return state
 }

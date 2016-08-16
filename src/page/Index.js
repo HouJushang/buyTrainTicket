@@ -11,23 +11,27 @@ import checkImage from '../images/train_trans.png';
 import { increase, decrease } from '../actions/index'
 
 
-function Index({ number, increase, decrease }) {
+function Index({ data, increase, decrease }) {
     return (
         <div id="main">
             <Header title="首页"/>
             <img src={bannerImage} className="trainBanner"/>
             <div className="chooseStaion">
                 <Link to={`/choose/startStaion`}
-                      className="startStaion station">出发站</Link>
+                      className="startStaion station">
+                    {data.startStaion.name}
+                </Link>
                 <div>
                     <img src={checkImage} alt="" width={35} height={35}/>
                 </div>
-                <Link to={`/choose/endStaion`} className="startStaion station">重点站</Link>
+                <Link to={`/choose/endStaion`} className="startStaion station">
+                    {data.endStation.name}
+                </Link>
             </div>
             <input type="date" className="date"/>
             <div className="submit">
                 <button onClick={() => increase(1)}>Increase</button>
-                查询{number}
+                查询{data.number}
                 <button onClick={() => decrease(1)}>Decrease</button>
             </div>
         </div>
@@ -35,7 +39,7 @@ function Index({ number, increase, decrease }) {
 }
 
 export default connect(
-    state => ({ number: state.index.number }),
+    state => ({ data: state.index }),
     { increase, decrease }
 )(Index)
 
