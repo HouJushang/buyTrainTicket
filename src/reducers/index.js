@@ -33,12 +33,10 @@ export default function update(state = initialState, action) {
             window.history.go(-1);
             return newState;
         }
-
     }
 
     //todo bug
     if (action.type === EXCHANGEADDRESS) {
-        alert(1);
         let newState = {};
         let startStation = Object.assign({}, state.startStation);
         let endStation = Object.assign({}, state.endStation);
