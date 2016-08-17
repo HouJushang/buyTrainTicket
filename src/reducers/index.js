@@ -2,12 +2,12 @@ import {INCREASE, DECREASE} from '../constants'
 
 const initialState = {
     startStaion: {
-        name: '上海',
-        code: 111
+        code: 'BJP',
+        cityName: '北京'
     },
     endStation: {
-        name: '北京',
-        code: 2222
+        code: 'SHH',
+        cityName: '上海'
     },
     number: 1
 }

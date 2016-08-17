@@ -1,33 +1,21 @@
-import {INCREASE, DECREASE} from '../constants'
+import {INITADDRESSLIST} from '../constants'
 
 const initialState = {
+    isLoading: false,
     list: [
         {
-            name: '北京',
-            id: 1
+            cityName: '列表',
+            code: 1
         },
-        {
-            name: '上海',
-            id: 2
-        },
-        {
-            name: '厦门',
-            id: 3
-        }
     ]
 }
 
 export default function update(state = initialState, action) {
-    // var newState = Object.assign({},state);
-    // if (action.type === INCREASE) {
-    //     const newNumber = state.number + action.amount;
-    //     newState.number = newNumber
-    //     return newState;
-    // }
-    // else if (action.type === DECREASE) {
-    //     const newNumber = state.number - action.amount;
-    //     newState.number = newNumber
-    //     return newState;
-    // }
+    var newState = Object.assign({}, state);
+    if (action.type === INITADDRESSLIST) {
+        newState.list = action.list;
+        newState.isLoading = true;
+        return newState;
+    }
     return state
 }

@@ -19,13 +19,13 @@ function Index({ data, increase, decrease }) {
             <div className="chooseStaion">
                 <Link to={`/choose/startStaion`}
                       className="startStaion station">
-                    {data.startStaion.name}
+                    {data.startStaion.cityName}
                 </Link>
                 <div>
                     <img src={checkImage} alt="" width={35} height={35}/>
                 </div>
                 <Link to={`/choose/endStaion`} className="startStaion station">
-                    {data.endStation.name}
+                    {data.endStation.cityName}
                 </Link>
             </div>
             <input type="date" className="date"/>
