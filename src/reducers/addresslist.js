@@ -2,12 +2,7 @@ import {INITADDRESSLIST} from '../constants'
 
 const initialState = {
     isLoading: false,
-    list: [
-        {
-            cityName: '列表',
-            code: 1
-        },
-    ]
+    list: []
 }
 
 export default function update(state = initialState, action) {

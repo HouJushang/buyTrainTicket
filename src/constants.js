@@ -1,4 +1,7 @@
-export const INCREASE = 'INCREASE'
-export const DECREASE = 'DECREASE'
-
+//选择车站
+export const CHOOSESTATION = 'CHOOSESTATION'
+//初始化地址
 export const INITADDRESSLIST = 'INITADDRESSLIST'
+//初始站和终点站对调
+export const EXCHANGEADDRESS = 'EXCHANGEADDRESS'
+
