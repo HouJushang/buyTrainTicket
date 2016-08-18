@@ -20,14 +20,15 @@ class Choose extends React.Component {
         }else{
             this.title = '选择终点车站';
         }
+        this.back = this.props.history.goBack;
     }
     render() {
         return (
             <div id="main">
-                <Header title={this.title}/>
-                {!this.props.data.isLoading ? <Loading /> : null }
+                <Header title={this.title} back={this.back}/>
+                {!this.props.data.addressListisLoading ? <Loading /> : null }
                 <ul>
-                    {this.props.data.list.map((object, i) => {
+                    {this.props.data.addressList.map((object, i) => {
                         return <li onClick={()=> this.submit(object, this.type)} key={i}>
                             {object.cityName}
                         </li>;
@@ -37,7 +38,7 @@ class Choose extends React.Component {
         );
     }
     componentDidMount() {
-        if (!this.props.data.isLoading) {
+        if (!this.isLoading) {
             this.props.ajaxinitaddresslist();
         }
     }

@@ -2,7 +2,7 @@
 import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, browserHistory} from 'react-router'
+import {Router, Route, hashHistory} from 'react-router'
 
 //redux
 import {createStore, combineReducers, applyMiddleware} from 'redux'
@@ -15,6 +15,9 @@ import thunk from 'redux-thunk';
 import Main from './page/Main.js';
 import Index from './page/Index.js';
 import Choose from './page/Choose.js';
+import TrainList from './page/TrainList.js';
+
+
 
 //style
 import './sass/main.sass'
@@ -31,7 +34,7 @@ const store = createStore(
     reducer,
     applyMiddleware(thunk)
 )
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(hashHistory, store)
 
 
 // Render the main component into the dom
@@ -41,6 +44,7 @@ ReactDOM.render(
             <Route path="/" component={Main}>
                 <Route path="index" component={Index}></Route>
                 <Route path="choose/:type" component={Choose}></Route>
+                <Route path="trainlist" component={TrainList}></Route>
             </Route>
         </Router>
     </Provider>, document.getElementById('app'));

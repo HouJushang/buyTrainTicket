@@ -57,6 +57,7 @@ class Index extends React.Component {
     }
 
     submit() {
+        window.location ='#/trainlist';
         console.log(1111,this.props.data.date, this.startStation, this.endStation);
     }
 }

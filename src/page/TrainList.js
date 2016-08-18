@@ -5,48 +5,46 @@ import {connect} from 'react-redux'
 import Header from '../components/Header.js';
 import Loading from '../components/Loading.js';
 
-import {ajaxinitaddresslist} from '../actions/addresslist'
-import {choosestaion} from '../actions/index'
+import {ajaxinittrainlist} from '../actions/trainlist'
 
 
-class Choose extends React.Component {
-    constructor({data, ajaxinitaddresslist, choosestaion}) {
+class TrainList extends React.Component {
+    constructor({data, indexData, ajaxinittrainlist}) {
         super();
+        this.title = '车次列表'
+
     }
+
     componentWillMount() {
-        this.type = this.props.params.type;
-        if(this.type=='startStation'){
-            this.title = '选择出发车站';
-        }else{
-            this.title = '选择终点车站';
-        }
+        this.back = this.props.history.goBack;
     }
+
     render() {
         return (
             <div id="main">
-                <Header title={this.title}/>
-                {!this.props.data.isLoading ? <Loading /> : null }
+                <Header title={this.title} back={this.back}/>
+                {!this.props.data.trainListisLoading ? <Loading /> : null }
                 <ul>
-                    {this.props.data.list.map((object, i) => {
+                    {this.props.data.trainList.map((object, i) => {
                         return <li onClick={()=> this.submit(object, this.type)} key={i}>
-                            {object.cityName}
+                            {object.from_station_name}
                         </li>;
                     })}
                 </ul>
             </div>
         );
     }
+
     componentDidMount() {
-        if (!this.props.data.isLoading) {
-            this.props.ajaxinitaddresslist();
-        }
-    }
-    submit(obj, type) {
-        this.props.choosestaion(obj, type);
+        this.props.ajaxinittrainlist({
+            from: this.props.indexData.startStation.code,
+            to: this.props.indexData.endStation.code,
+            date: this.props.indexData.date
+        })
     }
 }
 
 export default connect(
-    state => ({data: state.addresslist}),
-    {ajaxinitaddresslist, choosestaion}
-)(Choose)
+    state => ({data: state.trainlist, indexData: state.index}),
+    {ajaxinittrainlist}
+)(TrainList)

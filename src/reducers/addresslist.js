@@ -1,16 +1,16 @@
 import {INITADDRESSLIST} from '../constants'
 
 const initialState = {
-    isLoading: false,
-    list: []
+    addressListisLoading: false,
+    addressList: []
 }
 
 export default function update(state = initialState, action) {
-    var newState = Object.assign({}, state);
     if (action.type === INITADDRESSLIST) {
-        newState.list = action.list;
-        newState.isLoading = true;
-        return newState;
+        return Object.assign({}, state, {
+            addressList: action.list,
+            addressListisLoading: true
+        });
     }
     return state
 }

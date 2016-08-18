@@ -19,7 +19,7 @@ class Header extends React.Component {
 Header.defaultProps = {
     title: '头部默认标题',
     back (){
-        window.history.go(-1);
+        alert('返回按钮没定义')
     }
 };
 export default Header
