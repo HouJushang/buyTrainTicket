@@ -7,15 +7,20 @@ import Header from '../components/Header.js';
 import bannerImage from '../images/trainBanner.png';
 import checkImage from '../images/train_trans.png';
 
-import {exchangestation} from '../actions/index'
+import {exchangestation, changedate} from '../actions/index'
+
+
+
 
 
 class Index extends React.Component {
-    constructor({data, exchangestation}) {
+    constructor({data, exchangestation, changedate}) {
         super();
+        this.startStation = data.startStation;
+        this.endStation = data.endStation;
+        this.date = data.date;
+        this.onChange = this.datechange.bind(this);
 
-        this.startName = data.startStation.cityName;
-        this.endName = data.endStation.cityName;
     }
 
     componentWillMount() {
@@ -30,26 +35,34 @@ class Index extends React.Component {
                 <div className="chooseStaion">
                     <Link to={`/choose/startStation`}
                           className="startStaion station">
-                        {this.startName}
+                        {this.startStation.cityName}
                     </Link>
                     <div onClick={()=>this.props.exchangestation()}>
                         <img src={checkImage} alt="" width={35} height={35}/>
                     </div>
                     <Link to={`/choose/endStation`} className="startStaion station">
-                        {this.endName}
+                        {this.endStation.cityName}
                     </Link>
                 </div>
-                <input type="date" className="date"/>
-                <div className="submit">
+                <input type="date" className="date" defaultValue={this.date} onChange={this.onChange}/>
+                <div className="submit" onClick={()=>this.submit()}>
                     查询
                 </div>
             </div>
         );
     }
+
+    datechange(event) {
+        this.props.changedate(event.target.value);
+    }
+
+    submit() {
+        console.log(1111,this.props.data.date, this.startStation, this.endStation);
+    }
 }
 
 export default connect(
     state => ({data: state.index}),
-    {exchangestation}
+    {exchangestation, changedate}
 )(Index)
 

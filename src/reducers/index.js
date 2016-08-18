@@ -1,4 +1,5 @@
-import {CHOOSESTATION, EXCHANGEADDRESS} from '../constants'
+import {CHOOSESTATION, EXCHANGEADDRESS, INDEXCHANGEDATE} from '../constants'
+import dateformat from '../utils/dateFormat'
 
 const initialState = {
     startStation: {
@@ -8,7 +9,8 @@ const initialState = {
     endStation: {
         code: 'SHH',
         cityName: '上海'
-    }
+    },
+    date: dateformat(new Date(),'yyyy-MM-dd'),
 }
 
 export default function update(state = initialState, action) {
@@ -48,5 +50,11 @@ export default function update(state = initialState, action) {
     }
 
 
+    if (action.type === INDEXCHANGEDATE) {
+        let newState = Object.assign({}, state, {
+            date: action.date
+        });
+        return newState;
+    }
     return state
 }

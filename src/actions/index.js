@@ -1,4 +1,4 @@
-import {CHOOSESTATION, EXCHANGEADDRESS} from '../constants'
+import {CHOOSESTATION, EXCHANGEADDRESS, INDEXCHANGEDATE} from '../constants'
 
 export function choosestaion(obj, stationType) {
     return {
@@ -10,5 +10,11 @@ export function choosestaion(obj, stationType) {
 export function exchangestation() {
     return {
         type: EXCHANGEADDRESS,
+    }
+}
+export function changedate(date) {
+    return {
+        type: INDEXCHANGEDATE,
+        date: date
     }
 }
