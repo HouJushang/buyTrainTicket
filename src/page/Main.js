@@ -4,15 +4,21 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import Loading from '../components/Loading';
+
 class Main extends React.Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
-            <ReactCSSTransitionGroup component="div" transitionName="changepage" >
-                {this.props.children}
-            </ReactCSSTransitionGroup>
+            <div>
+                <ReactCSSTransitionGroup component="div" transitionName="changepage">
+                    {this.props.children}
+                </ReactCSSTransitionGroup>
+                <Loading />
+            </div>
         );
     }
 }

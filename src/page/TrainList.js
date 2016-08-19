@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 
 
 import Header from '../components/Header.js';
-import Loading from '../components/Loading.js';
 
 import {ajaxinittrainlist} from '../actions/trainlist'
 
@@ -23,11 +22,16 @@ class TrainList extends React.Component {
         return (
             <div id="main">
                 <Header title={this.title} back={this.back}/>
-                {!this.props.data.trainListisLoading ? <Loading /> : null }
                 <ul>
                     {this.props.data.trainList.map((object, i) => {
                         return <li onClick={()=> this.submit(object, this.type)} key={i}>
-                            {object.from_station_name}
+                            {object.train_code} <br/>
+                            出发站:{object.from_station_name} <br/>
+                            终点站: {object.to_station_name} <br/>
+                            出发时间:{object.start_time} <br/>
+                            到达时间:{object.arrive_time}<br/>
+                            历时: {object.run_time} <br/>
+                            <hr/>
                         </li>;
                     })}
                 </ul>

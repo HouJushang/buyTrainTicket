@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 
 
 import Header from '../components/Header.js';
-import Loading from '../components/Loading.js';
 
 import {ajaxinitaddresslist} from '../actions/addresslist'
 import {choosestaion} from '../actions/index'
@@ -26,7 +25,6 @@ class Choose extends React.Component {
         return (
             <div id="main">
                 <Header title={this.title} back={this.back}/>
-                {!this.props.data.addressListisLoading ? <Loading /> : null }
                 <ul>
                     {this.props.data.addressList.map((object, i) => {
                         return <li onClick={()=> this.submit(object, this.type)} key={i}>
