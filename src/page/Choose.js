@@ -9,7 +9,7 @@ import {choosestaion} from '../actions/index'
 
 
 class Choose extends React.Component {
-    constructor({data, ajaxinitaddresslist, choosestaion}) {
+    constructor() {
         super();
     }
     componentWillMount() {

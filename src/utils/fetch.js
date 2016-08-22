@@ -18,7 +18,7 @@ export default function (e) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': "Basic ZGdmd3RvbWNhdDEyMzQ6TjVQVzNPU0RDNjBYSDdLRTg0MUI="
+            'Authorization': 'Basic ZGdmd3RvbWNhdDEyMzQ6TjVQVzNPU0RDNjBYSDdLRTg0MUI='
         },
         body: JSON.stringify(parm)
     }).then(function (response) {

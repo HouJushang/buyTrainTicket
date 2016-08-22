@@ -3,17 +3,16 @@
  */
 import {INITTRAINLIST} from '../constants'
 
-import dateformat from '../utils/dateFormat'
+// import dateformat from '../utils/dateFormat'
 
 const initialState = {
     trainListisLoading: false,
-    trainList: [],
+    trainList: []
     // date: dateformat(new Date(), 'yyyy-MM-dd'),
 }
 
 export default function update(state = initialState, action) {
     if (action.type === INITTRAINLIST) {
-        console.log(action.list);
         return Object.assign({}, state, {
             trainList: action.list,
             trainListisLoading: true

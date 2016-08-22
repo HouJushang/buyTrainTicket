@@ -8,7 +8,7 @@ import {ajaxinittrainlist} from '../actions/trainlist'
 
 
 class TrainList extends React.Component {
-    constructor({data, indexData, ajaxinittrainlist}) {
+    constructor() {
         super();
         this.title = '车次列表'
 

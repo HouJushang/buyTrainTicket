@@ -5,7 +5,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 
 class Loading extends React.Component {
-    constructor({data}) {
+    constructor() {
         super();
     }
 

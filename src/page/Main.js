@@ -7,11 +7,11 @@ import {connect} from 'react-redux'
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Loading from '../components/Loading';
-import {openloading } from '../actions/loading'
+// import {openloading } from '../actions/loading'
 
 
 class Main extends React.Component {
-    constructor(data,openloading) {
+    constructor() {
         super();
     }
 

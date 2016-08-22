@@ -19,7 +19,10 @@ class Index extends React.Component {
         this.startStation = data.startStation;
         this.endStation = data.endStation;
         this.date = data.date;
-        this.onChange = this.datechange.bind(this);
+
+        // this.onChange = this.datechange.bind(this);
+        this.exchangestation = exchangestation;
+        this.changeDate = changedate;
 
     }
 
@@ -33,18 +36,18 @@ class Index extends React.Component {
                 <Header title="首页"/>
                 <img src={bannerImage} className="trainBanner"/>
                 <div className="chooseStaion">
-                    <Link to={`/choose/startStation`}
+                    <Link to={'/choose/startStation'}
                           className="startStaion station">
                         {this.startStation.cityName}
                     </Link>
                     <div onClick={()=>this.props.exchangestation()}>
                         <img src={checkImage} alt="" width={35} height={35}/>
                     </div>
-                    <Link to={`/choose/endStation`} className="startStaion station">
+                    <Link to={'/choose/endStation'} className="startStaion station">
                         {this.endStation.cityName}
                     </Link>
                 </div>
-                <input type="date" className="date" defaultValue={this.date} onChange={this.onChange}/>
+                <input type="date" className="date" defaultValue={this.date} onChange={this.datechange.bind(this)}/>
                 <div className="submit" onClick={()=>this.submit()}>
                     查询
                 </div>
@@ -53,12 +56,12 @@ class Index extends React.Component {
     }
 
     datechange(event) {
-        this.props.changedate(event.target.value);
+        this.changeDate(event.target.value);
     }
 
     submit() {
         window.location ='#/trainlist';
-        console.log(1111,this.props.data.date, this.startStation, this.endStation);
+        // console.log(1111,this.props.data.date, this.startStation, this.endStation);
     }
 }
 

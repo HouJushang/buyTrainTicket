@@ -9,7 +9,7 @@ export function choosestaion(obj, stationType) {
 }
 export function exchangestation() {
     return {
-        type: EXCHANGEADDRESS,
+        type: EXCHANGEADDRESS
     }
 }
 export function changedate(date) {

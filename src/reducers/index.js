@@ -10,7 +10,7 @@ const initialState = {
         code: 'SHH',
         cityName: '上海'
     },
-    date: dateformat(new Date(),'yyyy-MM-dd'),
+    date: dateformat(new Date(),'yyyy-MM-dd')
 }
 
 export default function update(state = initialState, action) {

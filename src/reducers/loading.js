@@ -2,7 +2,7 @@ import {OPENLOADING,CLOSTLOADING} from '../constants'
 
 const initialState = {
     loadingFont: '数据加载中...',
-    isLoading: true
+    isLoading: false
 }
 
 export default function update(state = initialState, action) {
