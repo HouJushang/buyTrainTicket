@@ -32,7 +32,7 @@ class Index extends React.Component {
 
     render() {
         return (
-            <div id="main">
+            <div className="indexPage">
                 <Header title="首页"/>
                 <img src={bannerImage} className="trainBanner"/>
                 <div className="chooseStaion">

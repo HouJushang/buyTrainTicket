@@ -8,6 +8,6 @@ export function openloading(font) {
 }
 export function closeloading() {
     return {
-        type: CLOSTLOADING
+        type: CLOSTLOADING,
     }
 }

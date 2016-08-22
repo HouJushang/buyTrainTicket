@@ -16,12 +16,16 @@ export function initaddresslist(arr) {
 
 export function ajaxinitaddresslist() {
     return (dispatch) => {
-        request({
-            url: 'cityInformation',
-            font: '加载地址中',
-            success: function (result) {
-                return dispatch(initaddresslist(result));
-            }
-        })
+        dispatch(
+            request(
+                {
+                    url: 'cityInformation',
+                    font: '加载地址中..',
+                    success: function (result) {
+                        return dispatch(initaddresslist(result));
+                    }
+                }
+            )
+        )
     }
 }

@@ -16,17 +16,18 @@ export function inittrainlist(arr) {
 
 export function ajaxinittrainlist(e) {
     return (dispatch) => {
-        request({
+        dispatch(request({
             url: 'ticketsAvailable',
             data: {
                 date: e.date,
                 from: e.from,
                 to: e.to
             },
-            font: '获取车次中!',
+            font: '获取车次中...',
             success: function (result) {
                 return dispatch(inittrainlist(result.available_tickets));
             }
-        })
+        }))
+
     }
 }

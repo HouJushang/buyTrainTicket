@@ -17,7 +17,8 @@ import Index from './page/Index.js';
 import Choose from './page/Choose.js';
 import TrainList from './page/TrainList.js';
 
-
+//dev
+import Dev from './components/DevTools'
 
 //style
 import './sass/main.sass'
@@ -32,6 +33,7 @@ const reducer = combineReducers({
 
 const store = createStore(
     reducer,
+    Dev.instrument(),
     applyMiddleware(thunk)
 )
 const history = syncHistoryWithStore(hashHistory, store)
@@ -40,12 +42,18 @@ const history = syncHistoryWithStore(hashHistory, store)
 // Render the main component into the dom
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history}>
-            <Route path="/" component={Main}>
-                <Route path="index" component={Index}></Route>
-                <Route path="choose/:type" component={Choose}></Route>
-                <Route path="trainlist" component={TrainList}></Route>
-            </Route>
-        </Router>
-    </Provider>, document.getElementById('app'));
+        <div>
+            <Dev />
+            <div className="pageContainer">
+                <Router history={history}>
+                    <Route path="/" component={Main}>
+                        <Route path="index" component={Index}></Route>
+                        <Route path="choose/:type" component={Choose}></Route>
+                        <Route path="trainlist" component={TrainList}></Route>
+                    </Route>
+                </Router>
+            </div>
+        </div>
+    </Provider>
+    , document.getElementById('app'));
 

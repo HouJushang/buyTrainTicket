@@ -9,8 +9,10 @@ import {choosestaion} from '../actions/index'
 
 
 class Choose extends React.Component {
-    constructor() {
+    constructor(data,ajaxinitaddresslist,choosestaion) {
         super();
+
+        this.data = data;
     }
     componentWillMount() {
         this.type = this.props.params.type;
