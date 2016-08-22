@@ -23,6 +23,7 @@ export function ajaxinittrainlist(e) {
                 from: e.from,
                 to: e.to
             },
+            font: '获取车次中!',
             success: function (result) {
                 return dispatch(inittrainlist(result.available_tickets));
             }

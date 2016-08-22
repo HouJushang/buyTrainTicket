@@ -2,7 +2,15 @@
  * Created by hfcb on 16/8/17.
  */
 import 'whatwg-fetch'
+import {openloading} from '../actions/loading'
+
 export default function (e) {
+
+    //弹出提示层
+    if(e.font){
+        openloading(e.font)
+    }
+
     var parm = e.data || {};
 
     fetch('http://app.donggaofuwu.com:8081/mobile.service/' + e.url, {

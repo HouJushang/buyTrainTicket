@@ -2,25 +2,31 @@
  * Created by hfcb on 16/8/10.
  */
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {connect} from 'react-redux'
+
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Loading from '../components/Loading';
+import {openloading } from '../actions/loading'
+
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(data,openloading) {
+        super();
     }
 
     render() {
         return (
             <div>
-                <ReactCSSTransitionGroup component="div" transitionName="changepage">
-                    {this.props.children}
-                </ReactCSSTransitionGroup>
-                <Loading />
+                {this.props.children}
+                {this.props.data.isLoading ? <Loading /> : null}
             </div>
         );
     }
-}
 
-export default Main;
+    componentDidMount() {
+    }
+}
+export default connect(
+    state => ({data: state.loading})
+)(Main)

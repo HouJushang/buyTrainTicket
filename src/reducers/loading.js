@@ -1,0 +1,22 @@
+import {OPENLOADING,CLOSTLOADING} from '../constants'
+
+const initialState = {
+    loadingFont: '数据加载中...',
+    isLoading: true
+}
+
+export default function update(state = initialState, action) {
+    if (action.type === OPENLOADING) {
+        return Object.assign({}, state, {
+            loadingFont: action.font,
+            isLoading: true
+        });
+    }
+    if(action.type === CLOSTLOADING){
+        return Object.assign({}, state, {
+            loadingFont: '数据加载中...',
+            isLoading: false
+        });
+    }
+    return state
+}

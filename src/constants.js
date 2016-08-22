@@ -7,4 +7,8 @@ export const EXCHANGEADDRESS = 'EXCHANGEADDRESS'
 //首页修改日期
 export const INDEXCHANGEDATE = 'INDEXCHANGEDATE'
 //初始化车次列表
-export const INITTRAINLIST ='INITTRAINLIST'
+export const INITTRAINLIST = 'INITTRAINLIST'
+//打开提示框
+export const OPENLOADING = 'OPENLOADING'
+//关闭提示框
+export const CLOSTLOADING = 'CLOSTLOADING'

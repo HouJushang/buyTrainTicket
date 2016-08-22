@@ -4,4 +4,6 @@
 export index from './index.js'
 export addresslist from './addresslist.js'
 export trainlist from './trainlist.js'
+export loading from './loading.js'
+
 
