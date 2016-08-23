@@ -20,7 +20,6 @@ class Index extends React.Component {
         this.endStation = data.endStation;
         this.date = data.date;
 
-        // this.onChange = this.datechange.bind(this);
         this.exchangestation = exchangestation;
         this.changeDate = changedate;
 

@@ -1,7 +1,7 @@
 /**
  * Created by hfcb on 16/8/18.
  */
-import {INITTRAINLIST} from '../constants'
+import {INITTRAINLIST,TYPESUBMIT} from '../constants'
 
 import request from '../utils/fetch'
 
@@ -29,5 +29,11 @@ export function ajaxinittrainlist(e) {
             }
         }))
 
+    }
+}
+export function typesubmit(arr){
+    return {
+        type: TYPESUBMIT,
+        typeArr: arr
     }
 }

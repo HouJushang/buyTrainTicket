@@ -12,3 +12,5 @@ export const INITTRAINLIST = 'INITTRAINLIST'
 export const OPENLOADING = 'OPENLOADING'
 //关闭提示框
 export const CLOSTLOADING = 'CLOSTLOADING'
+//确定选择车次种类
+export const TYPESUBMIT = 'TYPESUBMIT'
