@@ -1,7 +1,7 @@
 /**
  * Created by hfcb on 16/8/18.
  */
-import {INITTRAINLIST,TYPESUBMIT} from '../constants'
+import {INITTRAINLIST, TYPESUBMIT, OPTIONSUBMIT} from '../constants'
 
 import request from '../utils/fetch'
 
@@ -10,7 +10,7 @@ import request from '../utils/fetch'
 export function inittrainlist(arr) {
     return {
         type: INITTRAINLIST,
-        list: arr
+        data: arr
     }
 }
 
@@ -25,15 +25,21 @@ export function ajaxinittrainlist(e) {
             },
             font: '获取车次中...',
             success: function (result) {
-                return dispatch(inittrainlist(result.available_tickets));
+                return dispatch(inittrainlist(result));
             }
         }))
 
     }
 }
-export function typesubmit(arr){
+export function typesubmit(arr) {
     return {
         type: TYPESUBMIT,
         typeArr: arr
+    }
+}
+export function optionsubmit(data) {
+    return {
+        type: OPTIONSUBMIT,
+        option: data
     }
 }

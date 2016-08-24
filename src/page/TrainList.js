@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import Header from '../components/Header.js';
 
-import {ajaxinittrainlist, typesubmit} from '../actions/trainlist'
+import {ajaxinittrainlist, typesubmit, optionsubmit} from '../actions/trainlist'
 import dataToweek from '../utils/dateToWeek'
 import {preDay, nextDay} from '../utils/npdate'
 import {changedate} from '../actions/index'
@@ -20,9 +20,11 @@ class TrainList extends React.Component {
         this.back = this.props.history.goBack;
 
         this.state = {
-            trainTypeCheckbox: this.props.data.trainTypeCheckboxRel.slice()
+            trainTypeCheckbox: this.props.data.trainTypeCheckboxRel.slice(),
+            chooseToStation: this.props.data.chooseToStation.length > 0 ? this.props.data.chooseToStation.slice() : [],
+            chooseFromStation: this.props.data.chooseFromStation.length > 0 ? this.props.data.chooseFromStation.slice() : [],
+            chooseTime: this.props.data.chooseTime.length > 0 ? this.props.data.chooseTime.slice() : [],
         }
-
     }
 
     render() {
@@ -40,7 +42,7 @@ class TrainList extends React.Component {
                     </span>
                 </div>
                 <div>
-                    车型选择
+                    <h3>车型选择</h3>
                     {this.props.data.trainTypeData.map((object, i) => {
                         return <label key={i}>
                             <input type="checkbox" value={object.value} onChange={this.trainTypeChange.bind(this)}
@@ -49,11 +51,41 @@ class TrainList extends React.Component {
                     })}
                     <span onClick={this.typeSubmit.bind(this)}>确定</span>
                 </div>
-                <div>
-                    条件筛选
+                <div style={{border: '1px solid #ccc'}}>
+                    <h3>条件筛选</h3>
                     出发车站
+                    <div>
+                        {this.props.data.fromStation.map((object, i) => {
+                            return <label key={i}>
+                                <input type="checkbox" value={object.station_name}
+                                       checked={this.state.chooseFromStation.indexOf(object.station_name) > -1}
+                                       onChange={this.fromStationChange.bind(this)}/>
+                                {object.station_name}
+                            </label>
+                        })}
+                    </div>
+                    <hr/>
                     到达车站
-                    出发时间段
+                    <div>
+                        {this.props.data.toStation.map((object, i) => {
+                            return <label key={i}>
+                                <input type="checkbox" value={object.station_name}
+                                       checked={this.state.chooseToStation.indexOf(object.station_name) > -1}
+                                       onChange={this.toStationChange.bind(this)}/>
+                                {object.station_name}
+                            </label>
+                        })}
+                    </div>
+                    <hr/>
+                    <h5>出发时间段</h5><br/>
+                    <input type="checkbox" value={1} onChange={this.timeChange.bind(this)}/>10点之前 <br/>
+                    <input type="checkbox" value={2} onChange={this.timeChange.bind(this)}/>10:01-28:00<br/>
+                    <input type="checkbox" value={3} onChange={this.timeChange.bind(this)}/>18:01之后<br/>
+
+                    <span onClick={this.optionSubmit.bind(this)}>确定</span>
+                    <h3>排序</h3>
+                    按时间顺序
+                    按时间倒序
                 </div>
                 <ul>
                     {this.props.data.trainListFilter.map((object, i) => {
@@ -98,7 +130,7 @@ class TrainList extends React.Component {
     }
 
     //日期选择
-    datechange() {
+    datechange(event) {
         this.props.changedate(event.target.value);
         this.initList();
     }
@@ -119,9 +151,55 @@ class TrainList extends React.Component {
     typeSubmit() {
         this.props.typesubmit(this.state.trainTypeCheckbox);
     }
+
+    //车站选择
+    fromStationChange(event) {
+        let val = event.target.value;
+        let newArr = this.state.chooseFromStation;
+        if (event.target.checked) {
+            newArr.push(val)
+        } else {
+            newArr.splice(newArr.indexOf(val), 1)
+        }
+        this.setState({chooseFromStation: newArr})
+    }
+
+    toStationChange(event) {
+        let val = event.target.value;
+        let newArr = this.state.chooseToStation
+        if (event.target.checked) {
+            newArr.push(val)
+        } else {
+            newArr.splice(newArr.indexOf(val), 1)
+        }
+        this.setState({chooseToStation: newArr})
+
+    }
+
+    timeChange(event) {
+        let val = event.target.value;
+        let newArr = this.state.chooseTime;
+        if (event.target.checked) {
+            newArr.push(val)
+        } else {
+            newArr.splice(newArr.indexOf(val), 1)
+        }
+        this.setState({chooseTime: newArr})
+    }
+
+    optionSubmit() {
+        let time = this.state.chooseTime.length > 0 ? this.state.chooseTime : this.props.data.chooseTimeData.slice();
+        let toStation = this.state.chooseToStation.length > 0 ? this.state.chooseToStation : this.props.data.chooseToStation.slice();
+        let fromStation = this.state.chooseFromStation.length > 0 ? this.state.chooseFromStation : this.props.data.chooseFromStation.slice();
+        this.props.optionsubmit({
+            time: time,
+            toStation: toStation,
+            fromStation: fromStation
+        })
+    }
 }
 
 export default connect(
     state => ({data: state.trainlist, indexData: state.index}),
-    {ajaxinittrainlist, changedate, typesubmit}
+    {ajaxinittrainlist, changedate, typesubmit, optionsubmit}
 )(TrainList)

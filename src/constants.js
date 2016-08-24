@@ -14,3 +14,5 @@ export const OPENLOADING = 'OPENLOADING'
 export const CLOSTLOADING = 'CLOSTLOADING'
 //确定选择车次种类
 export const TYPESUBMIT = 'TYPESUBMIT'
+//选项确定
+export const OPTIONSUBMIT = 'OPTIONSUBMIT'
