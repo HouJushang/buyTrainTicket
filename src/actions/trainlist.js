@@ -28,7 +28,6 @@ export function ajaxinittrainlist(e) {
                 return dispatch(inittrainlist(result));
             }
         }))
-
     }
 }
 export function typesubmit(arr) {

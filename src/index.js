@@ -39,21 +39,34 @@ const store = createStore(
 const history = syncHistoryWithStore(hashHistory, store)
 
 
-// Render the main component into the dom
 ReactDOM.render(
     <Provider store={store}>
-        <div>
-            <Dev />
-            <div className="pageContainer">
-                <Router history={history}>
-                    <Route path="/" component={Main}>
-                        <Route path="index" component={Index}></Route>
-                        <Route path="choose/:type" component={Choose}></Route>
-                        <Route path="trainlist" component={TrainList}></Route>
-                    </Route>
-                </Router>
-            </div>
+        <div className="pageContainer">
+            <Router history={history}>
+                <Route path="/" component={Main}>
+                    <Route path="index" component={Index}></Route>
+                    <Route path="choose/:type" component={Choose}></Route>
+                    <Route path="trainlist" component={TrainList}></Route>
+                </Route>
+            </Router>
         </div>
     </Provider>
     , document.getElementById('app'));
+// Render the main component into the dom
+// ReactDOM.render(
+//     <Provider store={store}>
+//         <div>
+//             {/*<Dev />*/}
+//             <div className="pageContainer">
+//                 <Router history={history}>
+//                     <Route path="/" component={Main}>
+//                         <Route path="index" component={Index}></Route>
+//                         <Route path="choose/:type" component={Choose}></Route>
+//                         <Route path="trainlist" component={TrainList}></Route>
+//                     </Route>
+//                 </Router>
+//             </div>
+//         </div>
+//     </Provider>
+//     , document.getElementById('app'));
 

@@ -9,6 +9,9 @@ import dataToweek from '../utils/dateToWeek'
 import {preDay, nextDay} from '../utils/npdate'
 import {changedate} from '../actions/index'
 
+import iscroll from "iscroll"
+import ReactIScroll from "react-iscroll"
+
 
 class TrainList extends React.Component {
     constructor() {
@@ -21,15 +24,17 @@ class TrainList extends React.Component {
 
         this.state = {
             trainTypeCheckbox: this.props.data.trainTypeCheckboxRel.slice(),
-            chooseToStation: this.props.data.chooseToStation.length > 0 ? this.props.data.chooseToStation.slice() : [],
-            chooseFromStation: this.props.data.chooseFromStation.length > 0 ? this.props.data.chooseFromStation.slice() : [],
-            chooseTime: this.props.data.chooseTime.length > 0 ? this.props.data.chooseTime.slice() : [],
+            chooseToStation: [],
+            chooseFromStation: [],
+            chooseTime: [],
+            trainTypePopup: false,
+            optionPopup: false
         }
     }
 
     render() {
         return (
-            <div id="trainlistPage">
+            <div id="trainlistPage" className="pageHtml">
                 <Header title={this.title} back={this.back}/>
                 <div>
                     <span onClick={()=>this.npchange('pre', this.props.indexData.date)}>
@@ -41,7 +46,35 @@ class TrainList extends React.Component {
                         下一天
                     </span>
                 </div>
-                <div>
+                <div className="pageBody">
+                    <ReactIScroll iScroll={iscroll}>
+                        <ul>
+                            {this.props.data.trainListFilter.map((object, i) => {
+                                return <li onClick={this.toDetail} key={i}>
+                                    {object.train_code} <br/>
+                                    出发站:{object.from_station_name} <br/>
+                                    终点站: {object.to_station_name} <br/>
+                                    出发时间:{object.start_time} <br/>
+                                    到达时间:{object.arrive_time}<br/>
+                                    历时: {object.run_time} <br/>
+                                    {
+                                        object.ticketinfo.map((ticketObject, i)=> {
+                                            return <span
+                                                key={i}>{ticketObject.ticket_name}{ticketObject.ticket_price}元</span>
+                                        })
+                                    }
+                                    <hr/>
+                                </li>
+                            },this)}
+                        </ul>
+                    </ReactIScroll>
+                </div>
+                <div className="popupCanver" id={this.state.trainTypePopup || this.state.optionPopup ? "show" : "hide"}
+                     onClick={()=> {
+                         this.setState({trainTypePopup: false, optionPopup: false})
+                     }}>
+                </div>
+                <div className="trainTypePopup" id={this.state.trainTypePopup ? "show" : "hide"}>
                     <h3>车型选择</h3>
                     {this.props.data.trainTypeData.map((object, i) => {
                         return <label key={i}>
@@ -50,17 +83,20 @@ class TrainList extends React.Component {
                         </label>
                     })}
                     <span onClick={this.typeSubmit.bind(this)}>确定</span>
+                    <span onClick={()=> {
+                        this.setState({trainTypePopup: false})
+                    }}>关闭</span>
                 </div>
-                <div style={{border: '1px solid #ccc'}}>
-                    <h3>条件筛选</h3>
+
+                <div className="trainOptionPopup" id={this.state.optionPopup ? "show" : "hide"}>
                     出发车站
                     <div>
                         {this.props.data.fromStation.map((object, i) => {
                             return <label key={i}>
-                                <input type="checkbox" value={object.station_name}
-                                       checked={this.state.chooseFromStation.indexOf(object.station_name) > -1}
+                                <input type="checkbox" value={object}
+                                       checked={this.state.chooseFromStation.indexOf(object) > -1}
                                        onChange={this.fromStationChange.bind(this)}/>
-                                {object.station_name}
+                                {object}
                             </label>
                         })}
                     </div>
@@ -69,10 +105,10 @@ class TrainList extends React.Component {
                     <div>
                         {this.props.data.toStation.map((object, i) => {
                             return <label key={i}>
-                                <input type="checkbox" value={object.station_name}
-                                       checked={this.state.chooseToStation.indexOf(object.station_name) > -1}
+                                <input type="checkbox" value={object}
+                                       checked={this.state.chooseToStation.indexOf(object) > -1}
                                        onChange={this.toStationChange.bind(this)}/>
-                                {object.station_name}
+                                {object}
                             </label>
                         })}
                     </div>
@@ -83,23 +119,21 @@ class TrainList extends React.Component {
                     <input type="checkbox" value={3} onChange={this.timeChange.bind(this)}/>18:01之后<br/>
 
                     <span onClick={this.optionSubmit.bind(this)}>确定</span>
-                    <h3>排序</h3>
-                    按时间顺序
-                    按时间倒序
+                    <span onClick={()=> {
+                        this.setState({optionPopup: false})
+                    } }>关闭</span>
                 </div>
-                <ul>
-                    {this.props.data.trainListFilter.map((object, i) => {
-                        return <li onClick={()=> this.submit(object, this.type)} key={i}>
-                            {object.train_code} <br/>
-                            出发站:{object.from_station_name} <br/>
-                            终点站: {object.to_station_name} <br/>
-                            出发时间:{object.start_time} <br/>
-                            到达时间:{object.arrive_time}<br/>
-                            历时: {object.run_time} <br/>
-                            <hr/>
-                        </li>
-                    })}
-                </ul>
+                <div className="tranList-footer">
+                    <div className="footerItem">时间排序</div>
+                    <div className="footerItem" onClick={()=> {
+                        this.setState({trainTypePopup: true, optionPopup: false})
+                    } }>车型选择
+                    </div>
+                    <div className="footerItem" onClick={()=> {
+                        this.setState({optionPopup: true, trainTypePopup: false})
+                    } }>条件筛选
+                    </div>
+                </div>
             </div>
         );
     }
@@ -150,6 +184,7 @@ class TrainList extends React.Component {
     //火车类型选择确定
     typeSubmit() {
         this.props.typesubmit(this.state.trainTypeCheckbox);
+        this.setState({trainTypePopup: false});
     }
 
     //车站选择
@@ -173,11 +208,10 @@ class TrainList extends React.Component {
             newArr.splice(newArr.indexOf(val), 1)
         }
         this.setState({chooseToStation: newArr})
-
     }
 
     timeChange(event) {
-        let val = event.target.value;
+        let val = parseInt(event.target.value);
         let newArr = this.state.chooseTime;
         if (event.target.checked) {
             newArr.push(val)
@@ -188,14 +222,23 @@ class TrainList extends React.Component {
     }
 
     optionSubmit() {
-        let time = this.state.chooseTime.length > 0 ? this.state.chooseTime : this.props.data.chooseTimeData.slice();
-        let toStation = this.state.chooseToStation.length > 0 ? this.state.chooseToStation : this.props.data.chooseToStation.slice();
-        let fromStation = this.state.chooseFromStation.length > 0 ? this.state.chooseFromStation : this.props.data.chooseFromStation.slice();
         this.props.optionsubmit({
-            time: time,
-            toStation: toStation,
-            fromStation: fromStation
+            time: this.state.chooseTime,
+            toStation: this.state.chooseToStation,
+            fromStation: this.state.chooseFromStation
         })
+        this.setState({optionPopup: false})
+    }
+
+    toDetail(ev) {
+        ev.preventDefault();
+        alert(1);
+
+        // router.push({
+        //     pathname: '/users/12',
+        //     query: { modal: true },
+        //     state: { fromDashboard: true }
+        // })
     }
 }
 
