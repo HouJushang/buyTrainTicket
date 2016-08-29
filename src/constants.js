@@ -16,3 +16,5 @@ export const CLOSTLOADING = 'CLOSTLOADING'
 export const TYPESUBMIT = 'TYPESUBMIT'
 //选项确定
 export const OPTIONSUBMIT = 'OPTIONSUBMIT'
+//获取车次详情
+export const GETTRAINDETAIL = 'GETTRAINDETAIL'

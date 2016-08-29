@@ -16,6 +16,7 @@ import Main from './page/Main.js';
 import Index from './page/Index.js';
 import Choose from './page/Choose.js';
 import TrainList from './page/TrainList.js';
+import TrainDetail from './page/TrainDetail.js'
 
 //dev
 import Dev from './components/DevTools'
@@ -39,34 +40,37 @@ const store = createStore(
 const history = syncHistoryWithStore(hashHistory, store)
 
 
-ReactDOM.render(
-    <Provider store={store}>
-        <div className="pageContainer">
-            <Router history={history}>
-                <Route path="/" component={Main}>
-                    <Route path="index" component={Index}></Route>
-                    <Route path="choose/:type" component={Choose}></Route>
-                    <Route path="trainlist" component={TrainList}></Route>
-                </Route>
-            </Router>
-        </div>
-    </Provider>
-    , document.getElementById('app'));
-// Render the main component into the dom
 // ReactDOM.render(
 //     <Provider store={store}>
-//         <div>
-//             {/*<Dev />*/}
-//             <div className="pageContainer">
-//                 <Router history={history}>
-//                     <Route path="/" component={Main}>
-//                         <Route path="index" component={Index}></Route>
-//                         <Route path="choose/:type" component={Choose}></Route>
-//                         <Route path="trainlist" component={TrainList}></Route>
-//                     </Route>
-//                 </Router>
-//             </div>
+//         <div className="pageContainer">
+//             <Router history={history}>
+//                 <Route path="/" component={Main}>
+//                     <Route path="index" component={Index}></Route>
+//                     <Route path="choose/:type" component={Choose}></Route>
+//                     <Route path="trainlist" component={TrainList}></Route>
+//                     <Route path="traindetail/:traincode" component={TrainDetail}></Route>
+//
+//                 </Route>
+//             </Router>
 //         </div>
 //     </Provider>
 //     , document.getElementById('app'));
+// Render the main component into the dom
+ReactDOM.render(
+    <Provider store={store}>
+        <div>
+            <Dev />
+            <div className="pageContainer">
+                <Router history={history}>
+                    <Route path="/" component={Main}>
+                        <Route path="index" component={Index}></Route>
+                        <Route path="choose/:type" component={Choose}></Route>
+                        <Route path="trainlist" component={TrainList}></Route>
+                        <Route path="traindetail/:traincode" component={TrainDetail}></Route>
+                    </Route>
+                </Router>
+            </div>
+        </div>
+    </Provider>
+    , document.getElementById('app'));
 

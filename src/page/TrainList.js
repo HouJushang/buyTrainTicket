@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import {browserHistory} from 'react-router'
 
 
 import Header from '../components/Header.js';
@@ -47,10 +48,10 @@ class TrainList extends React.Component {
                     </span>
                 </div>
                 <div className="pageBody">
-                    <ReactIScroll iScroll={iscroll}>
+                    {/*<ReactIScroll iScroll={iscroll}>*/}
                         <ul>
                             {this.props.data.trainListFilter.map((object, i) => {
-                                return <li onClick={this.toDetail} key={i}>
+                                return <li onClick={(e)=>this.toDetail(object.train_code)} key={i}>
                                     {object.train_code} <br/>
                                     出发站:{object.from_station_name} <br/>
                                     终点站: {object.to_station_name} <br/>
@@ -65,9 +66,9 @@ class TrainList extends React.Component {
                                     }
                                     <hr/>
                                 </li>
-                            },this)}
+                            })}
                         </ul>
-                    </ReactIScroll>
+                    {/*</ReactIScroll>*/}
                 </div>
                 <div className="popupCanver" id={this.state.trainTypePopup || this.state.optionPopup ? "show" : "hide"}
                      onClick={()=> {
@@ -230,14 +231,10 @@ class TrainList extends React.Component {
         this.setState({optionPopup: false})
     }
 
-    toDetail(ev) {
-        ev.preventDefault();
-        alert(1);
-
-        // router.push({
-        //     pathname: '/users/12',
-        //     query: { modal: true },
-        //     state: { fromDashboard: true }
+    toDetail(traincode) {
+        location.href=`#/traindetail/${traincode}`;
+        // browserHistory.push({
+        //     pathname: '#/index'
         // })
     }
 }
