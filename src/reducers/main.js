@@ -6,5 +6,6 @@ export addresslist from './addresslist.js'
 export trainlist from './trainlist.js'
 export loading from './loading.js'
 export traindetail from './traindetail.js'
+export customer from './customer.js'
 
 

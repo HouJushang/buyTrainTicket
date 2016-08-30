@@ -18,3 +18,5 @@ export const TYPESUBMIT = 'TYPESUBMIT'
 export const OPTIONSUBMIT = 'OPTIONSUBMIT'
 //获取车次详情
 export const GETTRAINDETAIL = 'GETTRAINDETAIL'
+//初始化乘客列表
+export const INITCUSTOMERLIST = 'INITCUSTOMERLIST'

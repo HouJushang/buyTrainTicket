@@ -12,13 +12,13 @@ import thunk from 'redux-thunk';
 
 
 //page
-import Main from './page/Main.js';
-import Index from './page/Index.js';
-import Choose from './page/Choose.js';
-import TrainList from './page/TrainList.js';
+import Main from './page/Main.js'
+import Index from './page/Index.js'
+import Choose from './page/Choose.js'
+import TrainList from './page/TrainList.js'
 import TrainDetail from './page/TrainDetail.js'
 import SubmitOrder from './page/SubmitOrder.js'
-
+import ChooseCustomer from './page/ChooseCustomer.js'
 
 //dev
 import Dev from './components/DevTools'
@@ -68,6 +68,7 @@ ReactDOM.render(
                     <Route path="trainlist" component={TrainList}></Route>
                     <Route path="traindetail/:traincode" component={TrainDetail}></Route>
                     <Route path="ordersubmit/:type" component={SubmitOrder}></Route>
+                    <Route path="choosecustomer" component={ChooseCustomer}></Route>
                 </Route>
             </Router>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-
+import {Link} from 'react-router'
 
 import Header from '../components/Header.js';
 // import {ajaxinitaddresslist} from '../actions/addresslist'
@@ -15,16 +15,14 @@ class SubmitOrder extends React.Component {
     }
 
     componentWillMount() {
-
         this.ticket = this.props.trainDetailData.ticketinfo[this.props.params.type];
         console.log(this.ticket);
-
     }
 
     render() {
         return (
             <div id="main">
-                <Header title={this.title} back={this.props.history.goBack}/>
+                <Header title='确定订单' back={this.props.history.goBack}/>
                 <div>
                     开始时间{this.props.trainDetailData.start_time}<br/>
                     车次{this.props.trainDetailData.train_code}<br/>
@@ -41,7 +39,7 @@ class SubmitOrder extends React.Component {
                        作为类型: {this.ticket.ticket_name} 单价 ${this.ticket.ticket_price} 数量: {this.ticket.ticket_num}
                     </div>
                     <div>
-                        添加乘客
+                        <Link to={`/choosecustomer`}>添加乘客</Link>
                     </div>
                     <div>
                         联系人 <input type="text"/><br/>
