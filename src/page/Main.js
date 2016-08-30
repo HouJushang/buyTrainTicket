@@ -14,10 +14,12 @@ class Main extends React.Component {
     constructor() {
         super();
     }
+
     render() {
         return (
             <div className="pageHtml">
-                <ReactCSSTransitionGroup component="div"  transitionName="changePageAnimate"  transitionEnterTimeout={400}  transitionLeaveTimeout={400}>
+                <ReactCSSTransitionGroup component="div" transitionName={this.props.animate.className} transitionEnterTimeout={400}
+                                         transitionLeaveTimeout={400}>
                     {React.cloneElement(this.props.children, {
                         key: this.props.location.pathname
                     })}
@@ -26,9 +28,10 @@ class Main extends React.Component {
             </div>
         );
     }
+
     componentDidMount() {
     }
 }
 export default connect(
-    state => ({data: state.loading})
+    state => ({data: state.loading, animate: state.changeanimate})
 )(Main)

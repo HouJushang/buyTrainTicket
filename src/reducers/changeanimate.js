@@ -1,11 +1,11 @@
-import {INITADDRESSLIST} from '../constants'
+import {CHANGEPAGETYPE} from '../constants'
 
 const initialState = {
     className: 'animateright'
 }
 
 export default function update(state = initialState, action) {
-    if (action.type === INITADDRESSLIST) {
+    if (action.type === CHANGEPAGETYPE) {
         if(action.className = 'left'){
             var newClassName = 'animateleft';
         }

@@ -21,8 +21,6 @@ class TrainList extends React.Component {
     }
 
     componentWillMount() {
-        this.back = this.props.history.goBack;
-
         this.state = {
             trainTypeCheckbox: this.props.data.trainTypeCheckboxRel.slice(),
             chooseToStation: [],
@@ -35,11 +33,10 @@ class TrainList extends React.Component {
             click: true
         }
     }
-
     render() {
         return (
             <div className="animatepage trainlistPage">
-                <Header title={this.title} back={this.back}/>
+                <Header title={this.title}/>
                 <div>
                     <span onClick={()=>this.npchange('pre', this.props.indexData.date)}>
                         上一天
