@@ -52,7 +52,7 @@ class TrainDetail extends React.Component {
                                         <dd>{object.ticket_name}</dd>
                                         <dd><span>¥{object.ticket_price}</span></dd>
                                         <dd>{object.ticket_num}张</dd>
-                                        <dd><a className={object.ticket_num == 0 ? 'false' : 'true'}>预定</a></dd>
+                                        <dd><a className={object.ticket_num == 0 ? 'false' : 'true'} onClick={(e)=>this.goSubmitOrder(i)}>预定</a></dd>
                                     </dl>
                                 </div>
                             </li>
@@ -98,6 +98,9 @@ class TrainDetail extends React.Component {
             train_code: this.props.params.traincode
         }
         this.props.gettraindetail(parm);
+    }
+    goSubmitOrder(e){
+        location.href=`#/ordersubmit/${e}`;
     }
 }
 

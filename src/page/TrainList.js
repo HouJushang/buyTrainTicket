@@ -31,6 +31,9 @@ class TrainList extends React.Component {
             trainTypePopup: false,
             optionPopup: false
         }
+        this.iscrollOption = {
+            click: true
+        }
     }
 
     render() {
@@ -48,7 +51,7 @@ class TrainList extends React.Component {
                     </span>
                 </div>
                 <div className="pageBody">
-                    {/*<ReactIScroll iScroll={iscroll}>*/}
+                    <ReactIScroll iScroll={iscroll} options={this.iscrollOption}>
                         <ul>
                             {this.props.data.trainListFilter.map((object, i) => {
                                 return <li onClick={(e)=>this.toDetail(object.train_code)} key={i}>
@@ -68,7 +71,7 @@ class TrainList extends React.Component {
                                 </li>
                             })}
                         </ul>
-                    {/*</ReactIScroll>*/}
+                    </ReactIScroll>
                 </div>
                 <div className="popupCanver" id={this.state.trainTypePopup || this.state.optionPopup ? "show" : "hide"}
                      onClick={()=> {
