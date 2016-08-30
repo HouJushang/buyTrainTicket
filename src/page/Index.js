@@ -31,7 +31,7 @@ class Index extends React.Component {
 
     render() {
         return (
-            <div className="indexPage">
+            <div className="animatepage indexPage">
                 <Header title="首页"/>
                 <img src={bannerImage} className="trainBanner"/>
                 <div className="chooseStaion">

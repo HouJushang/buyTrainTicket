@@ -21,7 +21,7 @@ class SubmitOrder extends React.Component {
 
     render() {
         return (
-            <div id="main">
+            <div className="animatepage">
                 <Header title='确定订单' back={this.props.history.goBack}/>
                 <div>
                     开始时间{this.props.trainDetailData.start_time}<br/>

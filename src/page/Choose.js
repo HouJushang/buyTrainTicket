@@ -25,7 +25,7 @@ class Choose extends React.Component {
     }
     render() {
         return (
-            <div id="main">
+            <div className="animatepage">
                 <Header title={this.title} back={this.back}/>
                 <ul>
                     {this.props.data.addressList.map((object, i) => {

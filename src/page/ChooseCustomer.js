@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 
 import Header from '../components/Header.js';
 import {ajaxcustomerlist} from '../actions/customer'
-import timeTominute from '../utils/timeTominute.js'
 
 
 class ChooseCustomer extends React.Component {
@@ -13,17 +12,19 @@ class ChooseCustomer extends React.Component {
     }
 
     componentWillMount() {
-
+        this.state = {
+            chooseArr: this.props.customerData.chooseCustomer
+        }
     }
 
     render() {
         return (
-            <div id="main">
+            <div className="animatepage">
                 <Header title='选择乘客' back={this.props.history.goBack}/>
                 <ul>
                     {
                         this.props.customerData.customerList.map((object, i) => {
-                            return <li>
+                            return <li key={i}>
                                 <dl>
                                     <dd>
                                         编辑
@@ -41,7 +42,9 @@ class ChooseCustomer extends React.Component {
                                         {object.passportNo}
                                     </dd>
                                     <dd>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox" value={object.id}
+                                               checked={this.state.chooseArr.indexOf(object.id) > -1}
+                                               onChange={this.checkboxChange.bind(this)}/>
                                     </dd>
                                 </dl>
                             </li>
@@ -53,7 +56,17 @@ class ChooseCustomer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.ajaxcustomerlist()
+        this.props.ajaxcustomerlist();
+    }
+
+    checkboxChange(e) {
+        const newArr = this.state.chooseArr;
+        if (e.target.checked) {
+            newArr.push(e.target.value)
+        } else {
+            newArr.splice(newArr.indexOf(e.target.value), 1)
+        }
+        this.setState({chooseArr: newArr})
     }
 
     submit(obj, type) {

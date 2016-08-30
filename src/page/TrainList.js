@@ -38,7 +38,7 @@ class TrainList extends React.Component {
 
     render() {
         return (
-            <div id="trainlistPage" className="pageHtml">
+            <div className="animatepage trainlistPage">
                 <Header title={this.title} back={this.back}/>
                 <div>
                     <span onClick={()=>this.npchange('pre', this.props.indexData.date)}>
@@ -236,9 +236,6 @@ class TrainList extends React.Component {
 
     toDetail(traincode) {
         location.href=`#/traindetail/${traincode}`;
-        // browserHistory.push({
-        //     pathname: '#/index'
-        // })
     }
 }
 

@@ -1,32 +1,19 @@
-.changepage-enter
-    opacity: 0.01
+.animatepage
+    position: absolute
+    width: 100%
+    top: 0
+    bottom: 0
+.changePageAnimate-enter
+    left: 100%
 
-.changepage-enter.changepage-enter-active
-    opacity: 1
-    transition: opacity 500ms ease-in
+.changePageAnimate-enter.changePageAnimate-enter-active
+    left: 0
+    transition: left 400ms linear
 
-.changepage-leave
-    opacity: 1
+.changePageAnimate-leave
+    right: 0
 
-.changepage-leave.changepage-leave-active
-    opacity: 0.01
-    transition: opacity 300ms ease-in
-
-//.example-enter
-//    opacity: 0.01
-//    transition: opacity .5s ease-in
-//
-//.example-enter.example-enter-active
-//    opacity: 1
-//
-//.example-leave
-//    opacity: 1
-//    transition: opacity .5s ease-in
-//
-//.example-leave.example-leave-active
-//    opacity: 0
-//
-//.link-active
-//    color: #bbbbbb
-//    text-decoration: none
+.changePageAnimate-leave.changePageAnimate-leave-active
+    right: 100%
+    transition: right 400ms linear
 

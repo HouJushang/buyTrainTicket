@@ -23,7 +23,7 @@ class TrainDetail extends React.Component {
 
     render() {
         return (
-            <div id="main">
+            <div className="animatepage">
                 <Header title={this.title} back={this.props.history.goBack}/>
                 <div>
                     <span onClick={()=>this.npchange('pre', this.props.indexData.date)}>
