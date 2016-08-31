@@ -57,7 +57,6 @@ class TrainDetail extends React.Component {
                                 </div>
                             </li>
                         })}
-
                     </ul>
                 </div>
             </div>

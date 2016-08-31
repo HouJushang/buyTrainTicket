@@ -14,7 +14,7 @@ import thunk from 'redux-thunk';
 //page
 import Main from './page/Main.js'
 import Index from './page/Index.js'
-import Choose from './page/Choose.js'
+import Choose from './page/ChooseAddress.js'
 import TrainList from './page/TrainList.js'
 import TrainDetail from './page/TrainDetail.js'
 import SubmitOrder from './page/SubmitOrder.js'

@@ -17,7 +17,6 @@ export function ajaxcustomerlist(e) {
             },
             font: '获取顾客列表...',
             success: function (result) {
-                console.log(1111,result);
                 return dispatch(initcustomer(result));
             }
         }))
