@@ -3,7 +3,7 @@
  */
 import {CHANGEPAGETYPE} from '../constants'
 
-export default function changepagetype(type) {
+export function changepagetype(type) {
     return {
         type: CHANGEPAGETYPE,
         changeType: type

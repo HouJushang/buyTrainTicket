@@ -14,7 +14,6 @@ export default function update(state = initialState, action) {
     }
     if(action.type === CLOSTLOADING){
         return Object.assign({}, state, {
-            loadingFont: '数据加载中...',
             isLoading: false
         });
     }

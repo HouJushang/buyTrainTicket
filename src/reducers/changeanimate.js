@@ -6,15 +6,16 @@ const initialState = {
 
 export default function update(state = initialState, action) {
     if (action.type === CHANGEPAGETYPE) {
-        if(action.className = 'left'){
+        if(action.changeType == 'left'){
             var newClassName = 'animateleft';
         }
-        if(action.className = 'right'){
+        if(action.changeType == 'right'){
             var newClassName = 'animateright';
         }
-        return Object.assign({}, state, {
+        var newState = Object.assign({}, state, {
             className: newClassName
         });
+        return newState;
     }
     return state
 }

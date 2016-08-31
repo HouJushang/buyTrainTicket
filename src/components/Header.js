@@ -1,7 +1,7 @@
 /**
  * Created by hfcb on 16/8/9.
  */
-import React from 'react';
+import React from 'react'
 import {connect} from 'react-redux'
 import {changepagetype} from '../actions/changeAnimate'
 
@@ -9,6 +9,9 @@ class Header extends React.Component {
     back(){
         this.props.changepagetype('left');
         window.history.go(-1);
+        setTimeout(()=>{
+            this.props.changepagetype('right')
+        },400)
     }
     render() {
         return (

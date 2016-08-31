@@ -1,3 +1,4 @@
+$animateTime: 400ms
 .animatepage
     position: absolute
     width: 100%
@@ -8,12 +9,39 @@
 
 .animateright-enter.animateright-enter-active
     left: 0
-    transition: left 400ms linear
+    transition: left $animateTime linear
 
 .animateright-leave
     right: 0
 
 .animateright-leave.animateright-leave-active
     right: 100%
-    transition: right 400ms linear
+    transition: right $animateTime linear
 
+//left
+.animateleft-enter
+    right: 100%
+
+.animateleft-enter.animateleft-enter-active
+    right: 0
+    transition: right $animateTime linear
+
+.animateleft-leave
+    left: 0
+
+.animateleft-leave.animateleft-leave-active
+    left: 100%
+    transition: left $animateTime linear
+
+//loading animate
+$loadingTimer: 400ms
+.animate-loading-enter
+    opacity: 0
+.animate-loading-enter-active
+    opacity: 1
+    transition: opacity $loadingTimer linear
+.animate-loading-leave
+    opacity: 1
+.animate-loading-leave.animate-loading-leave-active
+    opacity: 0
+    transition: opacity $loadingTimer linear

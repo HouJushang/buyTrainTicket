@@ -7,14 +7,14 @@ import {connect} from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Loading from '../components/Loading';
-// import {openloading } from '../actions/loading'
 
 
 class Main extends React.Component {
     constructor() {
         super();
     }
-
+    componentWillMount() {
+    }
     render() {
         return (
             <div className="pageHtml">
@@ -24,7 +24,9 @@ class Main extends React.Component {
                         key: this.props.location.pathname
                     })}
                 </ReactCSSTransitionGroup>
+                <ReactCSSTransitionGroup component="div" transitionName={'animate-loading'} transitionEnterTimeout={400} transitionLeaveTimeout={400}>
                 {this.props.data.isLoading ? <Loading /> : null}
+                </ReactCSSTransitionGroup>
             </div>
         );
     }
