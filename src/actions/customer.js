@@ -1,4 +1,4 @@
-import {INITCUSTOMERLIST} from '../constants'
+import {INITCUSTOMERLIST,CHOOSECUSTOMER} from '../constants'
 import getPhone from '../native/getPhone'
 import request from '../utils/fetch'
 
@@ -21,6 +21,12 @@ export function ajaxcustomerlist(e) {
                 return dispatch(initcustomer(result));
             }
         }))
+    }
+}
+export function choosecustomer(list){
+    return {
+        type: CHOOSECUSTOMER,
+        list: list
     }
 }
 

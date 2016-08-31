@@ -3,20 +3,21 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router'
 
 import Header from '../components/Header.js';
-// import {ajaxinitaddresslist} from '../actions/addresslist'
-// import {choosestaion} from '../actions/index'
 import timeTominute from '../utils/timeTominute.js'
+import {ajaxcustomerlist, choosecustomer} from '../actions/customer'
+
+import getNativePhone from '../native/getPhone'
 
 
 class SubmitOrder extends React.Component {
     constructor() {
         super();
-        // this.props.params.type;
     }
 
     componentWillMount() {
         this.ticket = this.props.trainDetailData.ticketinfo[this.props.params.type];
-        console.log(this.ticket);
+        this.chooseArr = this.props.customerData.chooseCustomer.slice();
+        this.phoneNo = getNativePhone();
     }
 
     render() {
@@ -36,36 +37,70 @@ class SubmitOrder extends React.Component {
                         取票退票说明
                     </div>
                     <div>
-                       作为类型: {this.ticket.ticket_name} 单价 ${this.ticket.ticket_price} 数量: {this.ticket.ticket_num}
+                        作为类型: {this.ticket.ticket_name} 单价 ${this.ticket.ticket_price} 数量: {this.ticket.ticket_num}
                     </div>
+                    <ul>
+                        {
+                            this.props.customerData.customerList.map((object, i) => {
+                                if (this.chooseArr.indexOf(object.id) > -1) {
+                                    return <li key={i}>
+                                        <dl>
+                                            <dd onClick={(e)=>this.delCustomer(object.id)}>
+                                                删除
+                                            </dd>
+                                            <dd>
+                                                {object.passengerName}
+                                            </dd>
+                                            <dd>
+                                                {object.passportName}
+                                            </dd>
+                                            <dd>
+                                                {object.ticketTypeName}
+                                            </dd>
+                                            <dd>
+                                                {object.passportNo}
+                                            </dd>
+                                        </dl>
+                                    </li>
+                                }
+                            })
+                        }
+                    </ul>
                     <div>
                         <Link to={`/choosecustomer`}>添加乘客</Link>
                     </div>
                     <div>
                         联系人 <input type="text"/><br/>
-                        手机号码: <input type="text"/>
+                        手机号码: <span>{this.phoneNo}</span>
                     </div>
                     <div>
                         温馨提示:火车票无法保证100%出票，如出票失败将短信通知，退款将退回到您的付款账户，请您谅解。
                     </div>
                 </div>
                 <div>
-                    共0人 总计钱 <span>确认下单</span>
+                    共{this.chooseArr.length}人 总计{this.chooseArr.length * this.ticket.ticket_price}钱 <span onClick={()=>this.submit()}>确认下单</span>
                 </div>
             </div>
         );
     }
 
     componentDidMount() {
-
+        setTimeout(()=>this.props.ajaxcustomerlist(), 400)
     }
 
-    submit(obj, type) {
+    delCustomer(e) {
+        var itemIndex = this.chooseArr.indexOf(e);
+        this.chooseArr.splice(itemIndex, 1);
+        this.props.choosecustomer(this.chooseArr);
+    }
 
+    submit() {
+        //todo 验证是否选择乘客 length>0
+        console.log(this.chooseArr);
     }
 }
 
 export default connect(
-    state => ({trainDetailData: state.traindetail, indexData: state.index,}),
-    // {ajaxinitaddresslist, choosestaion}
+    state => ({trainDetailData: state.traindetail, indexData: state.index, customerData: state.customer}),
+    {ajaxcustomerlist, choosecustomer}
 )(SubmitOrder)

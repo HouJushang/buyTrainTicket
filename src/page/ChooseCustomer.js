@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 
 
 import Header from '../components/Header.js';
-import {ajaxcustomerlist} from '../actions/customer'
-
+import {ajaxcustomerlist,choosecustomer} from '../actions/customer'
 
 class ChooseCustomer extends React.Component {
     constructor() {
@@ -13,7 +12,7 @@ class ChooseCustomer extends React.Component {
 
     componentWillMount() {
         this.state = {
-            chooseArr: this.props.customerData.chooseCustomer
+            chooseArr: this.props.customerData.chooseCustomer.slice(),
         }
     }
 
@@ -51,6 +50,8 @@ class ChooseCustomer extends React.Component {
                         })
                     }
                 </ul>
+                <div onClick={()=>this.submit()}>确定</div>
+                <div>添加乘客</div>
             </div>
         );
     }
@@ -61,19 +62,22 @@ class ChooseCustomer extends React.Component {
 
     checkboxChange(e) {
         const newArr = this.state.chooseArr;
+        const val = parseInt(e.target.value);
         if (e.target.checked) {
-            newArr.push(e.target.value)
+            newArr.push(val)
         } else {
-            newArr.splice(newArr.indexOf(e.target.value), 1)
+            newArr.splice(newArr.indexOf(val), 1)
         }
         this.setState({chooseArr: newArr})
     }
 
-    submit(obj, type) {
+    submit() {
+        this.props.choosecustomer(this.state.chooseArr);
+        window.history.go(-1);
     }
 }
 
 export default connect(
     state => ({customerData: state.customer}),
-    {ajaxcustomerlist}
+    {ajaxcustomerlist,choosecustomer}
 )(ChooseCustomer)
