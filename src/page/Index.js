@@ -50,6 +50,10 @@ class Index extends React.Component {
                 <div className="submit" onClick={()=>this.submit()}>
                     查询
                 </div>
+                <div>
+                    <span>首页</span>
+                    <Link to="/myorder">我的订单</Link>
+                </div>
             </div>
         );
     }

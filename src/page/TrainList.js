@@ -1,17 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
-
-
 import Header from '../components/Header.js';
 
 import {ajaxinittrainlist, typesubmit, optionsubmit} from '../actions/trainlist'
 import dataToweek from '../utils/dateToWeek'
 import {preDay, nextDay} from '../utils/npdate'
 import {changedate} from '../actions/index'
-
-import iscroll from "iscroll"
-import ReactIScroll from "react-iscroll"
+import {iscroll,ReactIScroll,iscrollConfig} from '../utils/iscroll'
 
 
 class TrainList extends React.Component {
@@ -29,9 +25,6 @@ class TrainList extends React.Component {
             trainTypePopup: false,
             optionPopup: false
         }
-        this.iscrollOption = {
-            click: true
-        }
     }
     render() {
         return (
@@ -48,7 +41,7 @@ class TrainList extends React.Component {
                     </span>
                 </div>
                 <div className="pageBody">
-                    <ReactIScroll iScroll={iscroll} options={this.iscrollOption}>
+                    <ReactIScroll iScroll={iscroll} options={iscrollConfig()}>
                         <ul>
                             {this.props.data.trainListFilter.map((object, i) => {
                                 return <li onClick={(e)=>this.toDetail(object.train_code)} key={i}>

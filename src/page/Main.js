@@ -18,8 +18,8 @@ class Main extends React.Component {
     render() {
         return (
             <div className="pageHtml">
-                <ReactCSSTransitionGroup component="div" transitionName={this.props.animate.className} transitionEnterTimeout={400}
-                                         transitionLeaveTimeout={400}>
+                <ReactCSSTransitionGroup component="div" transitionName={this.props.animate.className} transitionEnterTimeout={340}
+                                         transitionLeaveTimeout={340}>
                     {React.cloneElement(this.props.children, {
                         key: this.props.location.pathname
                     })}

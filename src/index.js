@@ -19,6 +19,8 @@ import TrainList from './page/TrainList.js'
 import TrainDetail from './page/TrainDetail.js'
 import SubmitOrder from './page/SubmitOrder.js'
 import ChooseCustomer from './page/ChooseCustomer.js'
+import MyOrder from './page/MyOrder.js'
+
 
 //dev
 import Dev from './components/DevTools'
@@ -64,6 +66,7 @@ ReactDOM.render(
             <Router history={history}>
                 <Route path="/" component={Main}>
                     <Route path="index" component={Index}></Route>
+                    <Route path="myorder" component={MyOrder}></Route>
                     <Route path="choose/:type" component={Choose}></Route>
                     <Route path="trainlist" component={TrainList}></Route>
                     <Route path="traindetail/:traincode" component={TrainDetail}></Route>

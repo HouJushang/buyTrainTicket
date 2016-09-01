@@ -1,13 +1,22 @@
 import request from '../utils/fetch'
-
-export function submitorder(e) {
+import {ININMYORDER} from '../constants'
+import phoneNo from '../native/getPhone'
+export function initmyorder(list){
+    return {
+        type: ININMYORDER,
+        list: list
+    }
+}
+export function ajaxinitmyorder() {
     return (dispatch) => {
         dispatch(request({
-            url: 'submitTicketOrder',
-            data: e,
-            font: '提交订单...',
+            url: 'queryTicketOrder',
+            data: {
+                mobile: phoneNo()
+            },
+            font: '获取数据中...',
             success: function (result) {
-                console.log(result);
+                return dispatch(initmyorder(result));
             }
         }))
     }

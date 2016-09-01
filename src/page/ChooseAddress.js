@@ -38,9 +38,7 @@ class Choose extends React.Component {
         );
     }
     componentDidMount() {
-        if (!this.isLoading) {
-            this.props.ajaxinitaddresslist();
-        }
+        setTimeout(()=>this.props.ajaxinitaddresslist(),400)
     }
     submit(obj, type) {
         this.props.choosestaion(obj, type);
