@@ -1,18 +1,82 @@
-.indexPage
+.indexBody
+    background-color: #fff
     .trainBanner
         display: block
         width: 100%
         height: auto
 
     .chooseStaion
-        display: -webkit-flex /* Safari */
-        display: flex
+        @include bflex
         justify-content: center
-        line-height: 35px
-        margin-top: 20px
+        height: 50px
+        margin: 20px 0
         .station
-            width: 100px
+            vertical-align: bottom
+            flex-grow: 1
             text-align: center
+            p:first-child
+                font-size: 12px
+                color: #d6d6d9
+            p:last-child
+                font-size: 22px
+                font-weight: bold
+                margin-top: 10px
+                color: #333333
+    .indexlabelBox
+        display: block
+        border-top: 1px solid #d7d7d7
+        position: relative
+        padding: 20px 50px
+        overflow: hidden
+        &::before
+            position: absolute
+            left: 14px
+            width: 23px
+            content: ''
+        input
+            display: none
+    .label-indexDate
+        &::before
+            top: 15px
+            height: 25px
+            background-image: url("../images/datatime-icon.png")
+        &::after
+            content: ''
+            position: absolute
+            right: 15px
+            top: 21px
+            width: 10px
+            height: 10px
+            border-right: 3px solid #C7C7CB
+            border-top: 3px solid #C7C7CB
+            transform: rotate(45deg)
+    .label-onlydg
+        border-bottom: 1px solid #d7d7d7
+        &::before
+            top: 22px
+            height: 13px
+            background-image: url("../images/train-icon.png")
+            background-size: cover
+        .onlydg-checkbox
+            box-shadow: 0 1px 2px rgba(0,0,0,.05),inset 0 -15px 10px -12px rgba(0,0,0,.05)
+            padding: 11px
+            border-radius: 3px
+            display: inline-block
+            background-color: #fafafa
+            border: 1px solid #cacece
+            position: absolute
+            right: 15px
+            top: 16px
+        input:checked + .onlydg-checkbox
+            border: 1px solid $themeColor
+            background-color: $themeColor
+        input:checked + .onlydg-checkbox:after
+            content: url(../images/check.png)
+            font-size: 14px
+            vertical-align: middle
+            position: absolute
+            left: 2px
+            top: 2px
     .submit
         width: 120px
         height: 40px

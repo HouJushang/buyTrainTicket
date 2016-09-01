@@ -16,8 +16,7 @@ class Header extends React.Component {
     render() {
         return (
             <header>
-                <span onClick={this.back.bind(this)}>
-                    返回
+                <span className="backBtn" onClick={this.back.bind(this)}>
                 </span>
                 {this.props.title}
             </header>

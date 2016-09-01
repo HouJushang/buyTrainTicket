@@ -1,8 +1,26 @@
 header
-    height: 40px
-    background-color: #2F6FAD
+    height: $headerHeight
+    background-color: $themeColor
     text-align: center
     line-height: 40px
     color: #fff
-    span
+    position: relative
+    line-height: $headerHeight
+    font-size: 18px
+    .backBtn
         float: left
+        width: $headerHeight
+        height: $headerHeight
+        position: absolute
+        left: 0
+        top: 0
+        &::after
+            content: ''
+            position: absolute
+            left: 15px
+            top: 18px
+            width: 11px
+            height: 11px
+            border-bottom: 3px solid #fff
+            border-left: 3px solid #fff
+            transform: rotate(45deg)

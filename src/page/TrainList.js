@@ -7,7 +7,7 @@ import {ajaxinittrainlist, typesubmit, optionsubmit} from '../actions/trainlist'
 import dataToweek from '../utils/dateToWeek'
 import {preDay, nextDay} from '../utils/npdate'
 import {changedate} from '../actions/index'
-import {iscroll,ReactIScroll,iscrollConfig} from '../utils/iscroll'
+import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
 
 
 class TrainList extends React.Component {
@@ -26,6 +26,7 @@ class TrainList extends React.Component {
             optionPopup: false
         }
     }
+
     render() {
         return (
             <div className="animatepage trainlistPage">
@@ -133,7 +134,7 @@ class TrainList extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(()=>this.initList(),600)
+        setTimeout(()=>this.initList(), 600)
     }
 
     //初始化车次列表
@@ -225,7 +226,7 @@ class TrainList extends React.Component {
     }
 
     toDetail(traincode) {
-        location.href=`#/traindetail/${traincode}`;
+        location.href = `#/traindetail/${traincode}`;
     }
 }
 
