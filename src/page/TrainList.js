@@ -31,36 +31,52 @@ class TrainList extends React.Component {
         return (
             <div className="animatepage trainlistPage">
                 <Header title={this.title}/>
-                <div>
+                <div className="preNexDay">
                     <span onClick={()=>this.npchange('pre', this.props.indexData.date)}>
                         上一天
                     </span>
-                    <input type="date" className="date" value={this.props.indexData.date}
-                           onChange={this.datechange.bind(this)}/>{dataToweek(this.props.indexData.date)}
+                    <label htmlFor="trainListDate">
+                        {this.props.indexData.date} {dataToweek(this.props.indexData.date)}
+                        <input type="date" className="date" value={this.props.indexData.date}
+                               onChange={this.datechange.bind(this)}/>
+                    </label>
+
                     <span onClick={()=>this.npchange('next', this.props.indexData.date)}>
                         下一天
                     </span>
                 </div>
                 <div className="pageBody">
                     <ReactIScroll iScroll={iscroll} options={iscrollConfig()}>
-                        <ul>
+                        <ul className="trainlist-ul">
                             {this.props.data.trainListFilter.map((object, i) => {
                                 return <li onClick={(e)=>this.toDetail(object.train_code)} key={i}>
-                                    {object.train_code} <br/>
-                                    出发站:{object.from_station_name} <br/>
-                                    终点站: {object.to_station_name} <br/>
-                                    出发时间:{object.start_time} <br/>
-                                    到达时间:{object.arrive_time}<br/>
-                                    历时: {object.run_time} <br/>
-                                    {
-                                        object.ticketinfo.map((ticketObject, i)=> {
-                                            return <span
-                                                key={i}>{ticketObject.ticket_name}{ticketObject.ticket_price}元</span>
-                                        })
-                                    }
-                                    <hr/>
+                                    <dl>
+                                        <dd>
+                                            {object.start_time}<br/>
+                                            {object.arrive_time}
+                                        </dd>
+                                        <dd>
+                                            {object.train_code}
+                                        </dd>
+                                        <dd>
+                                            {object.from_station_name}<br/>
+                                            {object.to_station_name}<br/>
+                                        </dd>
+                                        <dd>
+                                            {object.run_time}<br/>
+                                            {object.ticketinfo[object.ticketinfo.length - 1].ticket_price}
+                                        </dd>
+                                    </dl>
+                                    <div className="ticketInfo">
+                                        {
+                                            object.ticketinfo.map((ticketObject, i)=> {
+                                                return <span
+                                                    key={i}>{ticketObject.ticket_name}{ticketObject.ticket_price}元</span>
+                                            })
+                                        }
+                                    </div>
                                 </li>
-                            })}
+                                })}
                         </ul>
                     </ReactIScroll>
                 </div>

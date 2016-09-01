@@ -19,8 +19,9 @@
         background-color: #fff
     .pageBody
         position: absolute
-        top: 60px
+        top: $headerHeight+42px
         bottom: $footerHeight
+        background-color: #fff
         left: 0px
         right: 0px
     .tranList-footer
@@ -33,4 +34,37 @@
         left: 0
         right: 0
         z-index: 101
+    .trainlist-ul
+        font-size: 14px
+        li
+            padding-left: 10px
+            @include borb
+            dl
+                display: flex
+                display: -webkit-flex
+                dd
+                    width: 1%
+                    flex-grow: 1
+            .ticketInfo
+                font-size: 12px
 
+.preNexDay
+    display: flex
+    display: -webkit-flex
+    margin-top: 6px
+    span, label
+        font-size: 13px
+        height: 30px
+        line-height: 31px
+    span
+        width: 1%
+        flex-grow: 1
+        text-align: center
+    label
+        background-color: $themeColor
+        color: #fff
+        padding: 0 15px
+        border-radius: 3px
+        -webkit-border-radius: 3px
+    input
+        display: none

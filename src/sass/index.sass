@@ -4,7 +4,11 @@
         display: block
         width: 100%
         height: auto
-
+    .animateImage
+        transition: all 1s
+        -webkit-transition: all 1s
+        transform: rotate(360deg)
+        -webkit-transform: rotate(360deg)
     .chooseStaion
         @include bflex
         justify-content: center
@@ -12,6 +16,7 @@
         margin: 20px 0
         .station
             vertical-align: bottom
+            width: 1%
             flex-grow: 1
             text-align: center
             p:first-child
@@ -28,6 +33,7 @@
         position: relative
         padding: 20px 50px
         overflow: hidden
+        font-size: 14px
         &::before
             position: absolute
             left: 14px
@@ -89,3 +95,19 @@
         display: block
         width: 120px
         margin: 0 auto
+.indexFooter
+    display: flex
+    display: -webkit-flex
+    position: absolute
+    bottom: 0px
+    left: 0px
+    right: 0px
+    height: 47px
+    border-top: 1px solid #d6d6d6
+    background-color: #fff
+    a
+        font-size: 13px
+        width: 1%
+        flex-grow: 1
+        text-align: center
+        height: 100%

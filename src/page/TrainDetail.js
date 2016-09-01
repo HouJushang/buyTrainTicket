@@ -25,12 +25,16 @@ class TrainDetail extends React.Component {
         return (
             <div className="animatepage">
                 <Header title={this.title} back={this.props.history.goBack}/>
-                <div>
+                {/*todo 可以的话这里搞个组件*/}
+                <div className="preNexDay">
                     <span onClick={()=>this.npchange('pre', this.props.indexData.date)}>
                         上一天
                     </span>
-                    <input type="date" className="date" value={this.props.indexData.date}
-                           onChange={this.datechange.bind(this)}/>{dataToweek(this.props.indexData.date)}
+                    <label htmlFor="detailDate">
+                        {this.props.indexData.date} {dataToweek(this.props.indexData.date)}
+                        <input type="date" className="date" value={this.props.indexData.date}
+                               onChange={this.datechange.bind(this)}/>
+                    </label>
                     <span onClick={()=>this.npchange('next', this.props.indexData.date)}>
                         下一天
                     </span>
