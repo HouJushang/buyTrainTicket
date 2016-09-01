@@ -24,7 +24,7 @@ class Main extends React.Component {
                         key: this.props.location.pathname
                     })}
                 </ReactCSSTransitionGroup>
-                <ReactCSSTransitionGroup component="div" transitionName={'animate-loading'} transitionEnterTimeout={250} transitionLeaveTimeout={250}>
+                <ReactCSSTransitionGroup component="div" transitionName={'animate-loading'} transitionEnterTimeout={180} transitionLeaveTimeout={180}>
                 {this.props.data.isLoading ? <Loading /> : null}
                 </ReactCSSTransitionGroup>
             </div>

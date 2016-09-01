@@ -52,8 +52,8 @@ class TrainList extends React.Component {
                                 return <li onClick={(e)=>this.toDetail(object.train_code)} key={i}>
                                     <dl>
                                         <dd>
-                                            {object.start_time}<br/>
-                                            {object.arrive_time}
+                                            <p className="startfont">{object.start_time}</p>
+                                            <p className="endfont">{object.arrive_time}</p>
                                         </dd>
                                         <dd>
                                             {object.train_code}
@@ -64,7 +64,7 @@ class TrainList extends React.Component {
                                         </dd>
                                         <dd>
                                             {object.run_time}<br/>
-                                            {object.ticketinfo[object.ticketinfo.length - 1].ticket_price}
+                                            {object.ticketinfo[object.ticketinfo.length - 1]['ticket_price']}
                                         </dd>
                                     </dl>
                                     <div className="ticketInfo">
