@@ -1,5 +1,5 @@
 .trainlistPage
-    $footerHeight: 55px
+    $footerHeight: 45px
     .popupCanver
         position: fixed
         left: 0
@@ -12,6 +12,58 @@
         width: 100%
         bottom: $footerHeight
         background-color: #fff
+        .vcheckbox
+            position: absolute
+            left: 10px
+            top: 8px
+            transform: scale(0.7,0.7)
+            -webkit-transform: scale(0.7,0.7)
+        input
+            display: none
+        dt
+            overflow: hidden
+            line-height: 35px
+            @include borb
+            span
+                height: 100%
+                padding: 0 10px
+                font-size: 13px
+                color: $themeColor
+        dd
+            font-size: 14px
+            padding-left: 40px
+            height: 40px
+            position: relative
+            label
+                display: block
+                span
+                    line-height: 40px
+    .trainOptionPopup
+        dt
+            overflow: hidden
+            line-height: 35px
+            @include borb
+            span
+                height: 100%
+                padding: 0 10px
+                font-size: 13px
+                color: $themeColor
+        dd
+            padding-left: 10px
+            .dd_header
+                font-size: 12px
+                color: #7c7c7c
+                margin-top: 7px
+            ul
+                overflow: hidden
+                font-size: 14px
+                li
+                    height: 30px
+                    line-height: 30px
+                    float: left
+                    margin-right: 10px
+                    &:last-child
+                        margin-right: 0px
     .trainOptionPopup
         position: absolute
         width: 100%
@@ -25,15 +77,24 @@
         left: 0px
         right: 0px
     .tranList-footer
+        background-color: $themeColor
         position: absolute
         display: flex
         display: -webkit-flex
-        justify-content: space-around
         bottom: 0
         height: $footerHeight
         left: 0
         right: 0
+        color: #fff
         z-index: 101
+        font-size: 12px
+        .footerItem
+            flex-grow: 1
+            width: 1%
+            text-align: center
+            img
+                display: block
+                margin: 5px auto
     .trainlist-ul
         color: #333333
         font-size: 14px
@@ -60,8 +121,39 @@
                     &:nth-of-type(2)
                         font-size: 21px
                         line-height: 40px
+                    &:nth-of-type(3)
+                        span
+                            font-size: 9px
+                            display: inline-block
+                            width: 15px
+                            height: 15px
+                            color: #FFF
+                            text-align: center
+                            line-height: 16px
+                            margin-right: 3px
+                            &.end
+                                background-color: $themeColor
+                            &.middle
+                                background-color: #5bce74
+                            &.start
+                                background-color: #faaa00
+                    &:nth-of-type(4)
+                        font-size: 14px
+                        line-height: 20px
+                        p
+                            padding-left: 5px
+                        p:last-child
+                            color: #faaa00
+                            span:first-child
+                                font-size: 10px
+
             .ticketInfo
-                font-size: 12px
+                font-size: 10px
+                color: #7c7c7c
+                padding: 4px 0
+                span
+                    display: inline-block
+                    margin-right: 10px
 
 .preNexDay
     display: flex

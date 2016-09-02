@@ -9,13 +9,16 @@ import {preDay, nextDay} from '../utils/npdate'
 import {changedate} from '../actions/index'
 import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
 
+import footerTimeIcon from '../images/gray-time-icon.png'
+import footerTypeIcon from '../images/gray-train-icon.png'
+import footerSelectIcon from '../images/gray-select-icon.png'
+
 
 class TrainList extends React.Component {
     constructor() {
         super();
         this.title = '车次列表'
     }
-
     componentWillMount() {
         this.state = {
             trainTypeCheckbox: this.props.data.trainTypeCheckboxRel.slice(),
@@ -26,7 +29,6 @@ class TrainList extends React.Component {
             optionPopup: false
         }
     }
-
     render() {
         return (
             <div className="animatepage trainlistPage">
@@ -59,24 +61,30 @@ class TrainList extends React.Component {
                                             {object.train_code}
                                         </dd>
                                         <dd>
+                                            {object.from_station_name === object.start_station_name ?
+                                                <span className="start">始</span> : <span className="middle">过</span>}
                                             {object.from_station_name}<br/>
+                                            {object.end_station_name === object.to_station_name ?
+                                                <span className="end">终</span> : <span className="middle">过</span>}
                                             {object.to_station_name}<br/>
                                         </dd>
                                         <dd>
-                                            {object.run_time}<br/>
-                                            {object.ticketinfo[object.ticketinfo.length - 1]['ticket_price']}
+                                            <p>{object.run_time}</p>
+                                            <p>
+                                                <span>￥</span><span>{object.ticketinfo[object.ticketinfo.length - 1]['ticket_price']}起</span>
+                                            </p>
                                         </dd>
                                     </dl>
                                     <div className="ticketInfo">
                                         {
                                             object.ticketinfo.map((ticketObject, i)=> {
                                                 return <span
-                                                    key={i}>{ticketObject.ticket_name}{ticketObject.ticket_price}元</span>
+                                                    key={i}>{ticketObject.ticket_name}({ticketObject.ticket_num == 0 ? '无' : ticketObject.ticket_num})</span>
                                             })
                                         }
                                     </div>
                                 </li>
-                                })}
+                            })}
                         </ul>
                     </ReactIScroll>
                 </div>
@@ -85,64 +93,105 @@ class TrainList extends React.Component {
                          this.setState({trainTypePopup: false, optionPopup: false})
                      }}>
                 </div>
-                <div className="trainTypePopup" id={this.state.trainTypePopup ? "show" : "hide"}>
-                    <h3>车型选择</h3>
+                <dl className="trainTypePopup" id={this.state.trainTypePopup ? "show" : "hide"}>
+                    <dt>
+                       <span className="fl" onClick={()=> {
+                           this.setState({trainTypePopup: false})
+                       }}>
+                           关闭
+                       </span>
+                        <span className="fr" onClick={this.typeSubmit.bind(this)}>
+                           确定
+                       </span>
+                    </dt>
                     {this.props.data.trainTypeData.map((object, i) => {
-                        return <label key={i}>
-                            <input type="checkbox" value={object.value} onChange={this.trainTypeChange.bind(this)}
-                                   checked={this.state.trainTypeCheckbox.indexOf(object.value) > -1}/> {object.name}
-                        </label>
+                        return <dd>
+                            <label key={i}>
+                                <input type="checkbox" value={object.value} onChange={this.trainTypeChange.bind(this)}
+                                       checked={this.state.trainTypeCheckbox.indexOf(object.value) > -1}/>
+                                <div className="vcheckbox"></div>
+                                <span>{object.name}</span>
+                            </label>
+                        </dd>
                     })}
-                    <span onClick={this.typeSubmit.bind(this)}>确定</span>
-                    <span onClick={()=> {
-                        this.setState({trainTypePopup: false})
-                    }}>关闭</span>
-                </div>
+                </dl>
 
-                <div className="trainOptionPopup" id={this.state.optionPopup ? "show" : "hide"}>
-                    出发车站
-                    <div>
-                        {this.props.data.fromStation.map((object, i) => {
-                            return <label key={i}>
-                                <input type="checkbox" value={object}
-                                       checked={this.state.chooseFromStation.indexOf(object) > -1}
-                                       onChange={this.fromStationChange.bind(this)}/>
-                                {object}
-                            </label>
-                        })}
-                    </div>
-                    <hr/>
-                    到达车站
-                    <div>
-                        {this.props.data.toStation.map((object, i) => {
-                            return <label key={i}>
-                                <input type="checkbox" value={object}
-                                       checked={this.state.chooseToStation.indexOf(object) > -1}
-                                       onChange={this.toStationChange.bind(this)}/>
-                                {object}
-                            </label>
-                        })}
-                    </div>
-                    <hr/>
-                    <h5>出发时间段</h5><br/>
-                    <input type="checkbox" value={1} onChange={this.timeChange.bind(this)}/>10点之前 <br/>
-                    <input type="checkbox" value={2} onChange={this.timeChange.bind(this)}/>10:01-28:00<br/>
-                    <input type="checkbox" value={3} onChange={this.timeChange.bind(this)}/>18:01之后<br/>
+                <dl className="trainOptionPopup" id={this.state.optionPopup ? "show" : "hide"}>
+                    <dt>
+                        <span className="fl" onClick={()=> {
+                            this.setState({optionPopup: false})
+                        }}>关闭</span>
+                        <span className="fr" onClick={this.optionSubmit.bind(this)}>确定</span>
+                    </dt>
+                    <dd>
+                        <div className="dd_header">
+                            出发车站
+                        </div>
+                        <ul>
+                            {this.props.data.fromStation.map((object, i) => {
+                                return <li>
+                                    <label key={i}>
+                                        <input type="checkbox" value={object}
+                                               checked={this.state.chooseFromStation.indexOf(object) > -1}
+                                               onChange={this.fromStationChange.bind(this)}/>
+                                        {object}
+                                    </label>
+                                </li>
+                            })}
+                        </ul>
+                    </dd>
+                    <dd>
 
-                    <span onClick={this.optionSubmit.bind(this)}>确定</span>
-                    <span onClick={()=> {
-                        this.setState({optionPopup: false})
-                    } }>关闭</span>
-                </div>
+                        <div className="dd_header">
+                            到达车站
+                        </div>
+                        <ul>
+                            {this.props.data.toStation.map((object, i) => {
+                                return <li key={i}>
+                                    <label>
+                                        <input type="checkbox" value={object}
+                                               checked={this.state.chooseToStation.indexOf(object) > -1}
+                                               onChange={this.toStationChange.bind(this)}/>
+                                        {object}
+                                    </label>
+                                </li>
+                            })}
+                        </ul>
+
+                    </dd>
+                    <dd>
+                        <div className="dd_header">
+                            出发时间段
+                        </div>
+                        <ul>
+                            <li>
+                                <input type="checkbox" value={1} onChange={this.timeChange.bind(this)}/>10点之前 <br/>
+                            </li>
+                            <li>
+                                <input type="checkbox" value={2} onChange={this.timeChange.bind(this)}/>10:01-18:00<br/>
+                            </li>
+                            <li>
+                                <input type="checkbox" value={3} onChange={this.timeChange.bind(this)}/>18:01之后<br/>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
                 <div className="tranList-footer">
-                    <div className="footerItem">时间排序</div>
+                    <div className="footerItem">
+                        <img src={footerTimeIcon} width={16} height={16}/>
+                        时间排序
+                    </div>
                     <div className="footerItem" onClick={()=> {
                         this.setState({trainTypePopup: true, optionPopup: false})
-                    } }>车型选择
+                    } }>
+                        <img src={footerTypeIcon} width={16} height={16}/>
+                        车型选择
                     </div>
                     <div className="footerItem" onClick={()=> {
                         this.setState({optionPopup: true, trainTypePopup: false})
-                    } }>条件筛选
+                    } }>
+                        <img src={footerSelectIcon} width={16} height={16}/>
+                        条件筛选
                     </div>
                 </div>
             </div>

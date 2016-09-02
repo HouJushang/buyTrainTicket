@@ -49,7 +49,7 @@ class Index extends React.Component {
                     </label>
                     <label htmlFor="onlaydg" className="indexlabelBox label-onlydg">
                         只查询高铁/动车 <input id="onlaydg" type="checkbox" className="fr" onChange={(e)=>this.onlyDg(e)}/>
-                        <div className="onlydg-checkbox"></div>
+                        <div className="vcheckbox"></div>
                     </label>
                 </div>
                 <div className="okBtn mt15" onClick={()=>this.submit()}>

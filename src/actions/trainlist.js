@@ -25,6 +25,7 @@ export function ajaxinittrainlist(e) {
             },
             font: '获取车次中...',
             success: function (result) {
+                console.log(result);
                 return dispatch(inittrainlist(result));
             }
         }))
