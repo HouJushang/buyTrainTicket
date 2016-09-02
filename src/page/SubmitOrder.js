@@ -10,6 +10,7 @@ import getNativePhone from '../native/getPhone'
 import dataToweek from '../utils/dateToWeek'
 import arrowImage from '../images/bigArrow.png'
 import warmImage from '../images/warm-icon.png'
+import addCustomerImage from '../images/addCustom.png'
 
 
 class SubmitOrder extends React.Component {
@@ -23,6 +24,7 @@ class SubmitOrder extends React.Component {
         this.phoneNo = getNativePhone();
         this.detail = this.props.trainDetailData;
     }
+
     render() {
         return (
             <div className="animatepage submitOrderPage">
@@ -48,56 +50,58 @@ class SubmitOrder extends React.Component {
                     <img src={warmImage} width={15} className="vm mr5"/>取票、退票、改签说明 >>
                 </div>
                 <dl className="ticketInfo">
-                   <dd>
-                       座位类型
-                   </dd>
+                    <dd>
+                        座位类型
+                    </dd>
                     <dd>
                         <p>{this.ticket.ticket_name}</p>
                         <p>
-                            　<span>￥</span>{this.ticket.ticket_price}
+                            <span>￥</span>{this.ticket.ticket_price}
                         </p>
                     </dd>
-                    <dd>　</dd>
+                    <dd></dd>
                 </dl>
-                <div>
-                    <ul>
+                <dl className="customerM">
+                    <dt>
+                        <img src={addCustomerImage} width='16'/>
+                        <Link to={`/choosecustomer`}>添加乘客</Link>
+                    </dt>
                         {
                             this.props.customerData.customerList.map((object, i) => {
                                 if (this.chooseArr.indexOf(object.id) > -1) {
-                                    return <li key={i}>
+                                    return <dd key={i}>
                                         <dl>
                                             <dd onClick={(e)=>this.delCustomer(object.id)}>
                                                 删除
                                             </dd>
                                             <dd>
-                                                {object.passengerName}
-                                            </dd>
-                                            <dd>
-                                                {object.passportName}
-                                            </dd>
-                                            <dd>
-                                                {object.ticketTypeName}
-                                            </dd>
-                                            <dd>
-                                                {object.passportNo}
+                                                <p>
+                                                    <span>{object.passengerName}</span>
+                                                    <span>{object.passportName}</span>
+                                                </p>
+                                                <p>
+                                                    <span>
+                                                        {object.ticketTypeName}
+                                                    </span>
+                                                    <span>
+                                                        {object.passportNo}
+                                                    </span>
+                                                </p>
                                             </dd>
                                         </dl>
-                                    </li>
+                                    </dd>
                                 }
                             })
                         }
-                    </ul>
-                    <div>
-                        <Link to={`/choosecustomer`}>添加乘客</Link>
-                    </div>
-                    <div>
-                        联系人 <input type="text" onChange={(e)=>this.nameChange(e)}/><br/>
-                        手机号码: <span>{this.phoneNo}</span>
-                    </div>
-                    <div>
-                        温馨提示:火车票无法保证100%出票，如出票失败将短信通知，退款将退回到您的付款账户，请您谅解。
-                    </div>
+                </dl>
+                <div>
+                    联系人 <input type="text" onChange={(e)=>this.nameChange(e)}/><br/>
+                    手机号码: <span>{this.phoneNo}</span>
                 </div>
+                <div>
+                    温馨提示:火车票无法保证100%出票，如出票失败将短信通知，退款将退回到您的付款账户，请您谅解。
+                </div>
+
                 <div>
                     共{this.chooseArr.length}人 总计{this.chooseArr.length * this.ticket.ticket_price}钱 <span
                     onClick={()=>this.submit()}>确认下单</span>
@@ -105,17 +109,20 @@ class SubmitOrder extends React.Component {
             </div>
         );
     }
+
     componentDidMount() {
-        if(!this.props.customerData.customerList.length>0){
+        if (!this.props.customerData.customerList.length > 0) {
             setTimeout(()=>this.props.ajaxcustomerlist(), 400)
         }
 
     }
+
     delCustomer(e) {
         var itemIndex = this.chooseArr.indexOf(e);
         this.chooseArr.splice(itemIndex, 1);
         this.props.choosecustomer(this.chooseArr);
     }
+
     nameChange(e) {
         this.name = e.target.value
     }
@@ -155,5 +162,5 @@ class SubmitOrder extends React.Component {
 
 export default connect(
     state => ({trainDetailData: state.traindetail, indexData: state.index, customerData: state.customer}),
-    {ajaxcustomerlist, choosecustomer,submitorder}
+    {ajaxcustomerlist, choosecustomer, submitorder}
 )(SubmitOrder)

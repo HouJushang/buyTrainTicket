@@ -61,8 +61,8 @@ class TrainDetail extends React.Component {
                         return <li key={i}>
                                 <dl>
                                     <dd>{object.ticket_name}</dd>
-                                    <dd><span>¥{object.ticket_price}</span></dd>
-                                    <dd>{object.ticket_num}张</dd>
+                                    <dd><span>¥</span>{object.ticket_price}</dd>
+                                    {object.ticket_num == 0 ? <dd className="useLessFont">无票</dd> : <dd>{object.ticket_num}张</dd> }
                                     {object.ticket_num == 0 ? <dd><span className="falseBtn">预定</span></dd> : <dd onClick={(e)=>this.goSubmitOrder(i)}><span className="trueBtn">预定</span></dd>}
                                 </dl>
                         </li>

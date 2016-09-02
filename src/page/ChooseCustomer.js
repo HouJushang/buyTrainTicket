@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 
 import Header from '../components/Header.js';
 import {ajaxcustomerlist, choosecustomer} from '../actions/customer'
-import iscroll from "iscroll"
-import ReactIScroll from "react-iscroll"
 
 class ChooseCustomer extends React.Component {
     constructor() {
@@ -22,9 +20,8 @@ class ChooseCustomer extends React.Component {
             <div className="animatepage choosecustomerpage">
                 <Header title='选择乘客' back={this.props.history.goBack}/>
                 <div className="pageBody">
-                    <ReactIScroll iScroll={iscroll} options={this.iscrollOption}>
                         <div>
-
+                            <div onClick={()=>this.submit()}>确定</div>
                             <ul>
                                 {
                                     this.props.customerData.customerList.map((object, i) => {
@@ -55,9 +52,7 @@ class ChooseCustomer extends React.Component {
                                     })
                                 }
                             </ul>
-                            <div onClick={()=>this.submit()}>确定</div>
                         </div>
-                    </ReactIScroll>
                 </div>
                 <div className="pageFooter">添加乘客</div>
             </div>
