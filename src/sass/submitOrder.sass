@@ -1,0 +1,44 @@
+.submitOrderPage
+    .infoShow
+        margin: 10px 0
+        img
+            position: relative
+            top: -1px
+    .ticketInfo
+        display: flex
+        display: -webkit-flex
+        background-color: #fff
+        @include borb
+        @include bort
+        padding: 8px 0
+        dd
+            -webkit-flex-grow: 1
+            flex-grow: 1
+            line-height: 26px
+            height: 25px
+            &:first-child
+                text-align: left
+                font-size: 14px
+                color: #333333
+                padding-left: 10px
+            &:nth-of-type(2)
+                text-align: center
+                p
+                    display: inline-block
+                    &:last-child
+                        color: #ff9205
+                        span
+                            font-size: 9px
+            &:last-child
+                position: relative
+                &::after
+                    content: ''
+                    position: absolute
+                    right: 15px
+                    top: 8px
+                    width: 8px
+                    height: 8px
+                    border-right: 2px solid #C7C7CB
+                    border-top: 2px solid #C7C7CB
+                    transform: rotate(45deg)
+                    -webkit-transform: rotate(45deg)

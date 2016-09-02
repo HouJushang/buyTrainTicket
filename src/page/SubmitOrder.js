@@ -7,6 +7,9 @@ import timeTominute from '../utils/timeTominute.js'
 import {ajaxcustomerlist, choosecustomer} from '../actions/customer'
 import {submitorder} from '../actions/order'
 import getNativePhone from '../native/getPhone'
+import dataToweek from '../utils/dateToWeek'
+import arrowImage from '../images/bigArrow.png'
+import warmImage from '../images/warm-icon.png'
 
 
 class SubmitOrder extends React.Component {
@@ -20,26 +23,43 @@ class SubmitOrder extends React.Component {
         this.phoneNo = getNativePhone();
         this.detail = this.props.trainDetailData;
     }
-
     render() {
         return (
-            <div className="animatepage">
+            <div className="animatepage submitOrderPage">
                 <Header title='确定订单' back={this.props.history.goBack}/>
+                <dl className="submitHeader">
+                    <dd>
+                        <p>{this.props.trainDetailData.from_station_name}</p>
+                        <p className="timeFont">{this.props.trainDetailData.start_time}</p>
+                        <p>{this.props.indexData.date} {dataToweek(this.props.indexData.date)}</p>
+                    </dd>
+                    <dd>
+                        <p>{this.props.trainDetailData.train_code}</p>
+                        <img src={arrowImage} width={100}/>
+                        <p>{timeTominute(this.props.trainDetailData.run_time_minute)}</p>
+                    </dd>
+                    <dd>
+                        <p> {this.props.trainDetailData.to_station_name}</p>
+                        <p className="timeFont">{this.props.trainDetailData.arrive_time}</p>
+                        <p>{this.props.trainDetailData.to_station_date} {dataToweek(this.props.trainDetailData.to_station_date)}</p>
+                    </dd>
+                </dl>
+                <div className="infoShow tr pr10 f12">
+                    <img src={warmImage} width={15} className="vm mr5"/>取票、退票、改签说明 >>
+                </div>
+                <dl className="ticketInfo">
+                   <dd>
+                       座位类型
+                   </dd>
+                    <dd>
+                        <p>{this.ticket.ticket_name}</p>
+                        <p>
+                            　<span>￥</span>{this.ticket.ticket_price}
+                        </p>
+                    </dd>
+                    <dd>　</dd>
+                </dl>
                 <div>
-                    开始时间{this.detail.start_time}<br/>
-                    车次{this.detail.train_code}<br/>
-                    出发站{this.detail.from_station_name}<br/>
-                    到达站{this.detail.to_station_name}<br/>
-                    到达时间:{this.detail.arrive_time}<br/>
-                    运行时间: {timeTominute(this.detail.run_time_minute)}<br/>
-                    出发日期: {this.props.indexData.date}<br/>
-                    到达日期: {this.detail.to_station_date}<br/>
-                    <div>
-                        取票退票说明
-                    </div>
-                    <div>
-                        作为类型: {this.ticket.ticket_name} 单价 ${this.ticket.ticket_price} 数量: {this.ticket.ticket_num}
-                    </div>
                     <ul>
                         {
                             this.props.customerData.customerList.map((object, i) => {
@@ -85,20 +105,17 @@ class SubmitOrder extends React.Component {
             </div>
         );
     }
-
     componentDidMount() {
         if(!this.props.customerData.customerList.length>0){
             setTimeout(()=>this.props.ajaxcustomerlist(), 400)
         }
 
     }
-
     delCustomer(e) {
         var itemIndex = this.chooseArr.indexOf(e);
         this.chooseArr.splice(itemIndex, 1);
         this.props.choosecustomer(this.chooseArr);
     }
-
     nameChange(e) {
         this.name = e.target.value
     }

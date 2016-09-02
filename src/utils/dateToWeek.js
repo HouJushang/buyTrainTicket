@@ -1,4 +1,7 @@
 export default function (dateStr) {
+    if(!dateStr){
+        return ''
+    }
     const weekArr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
     let d = new Date(dateStr.replace(/-/g, "/"));
     let todaysDate = new Date();

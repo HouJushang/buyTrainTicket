@@ -11,6 +11,7 @@ import {gettraindetail} from '../actions/trainDetail.js';
 import {changedate} from '../actions/index'
 
 import timeTominute from '../utils/timeTominute.js'
+import arrowImage from '../images/bigArrow.png'
 
 class TrainDetail extends React.Component {
     constructor() {
@@ -23,52 +24,58 @@ class TrainDetail extends React.Component {
 
     render() {
         return (
-            <div className="animatepage">
+            <div className="animatepage trainDetailPage">
                 <Header title={this.title} back={this.props.history.goBack}/>
-                {/*todo 可以的话这里搞个组件*/}
+                <dl className="trainDetailHeader">
+                    <dd>
+                        <p>{this.props.trainDetailData.from_station_name}</p>
+                        <p className="timeFont">{this.props.trainDetailData.start_time}</p>
+                        <p>{this.props.indexData.date} {dataToweek(this.props.indexData.date)}</p>
+                    </dd>
+                    <dd>
+                        <p>{this.props.trainDetailData.train_code}</p>
+                        <img src={arrowImage} width={100}/>
+                        <p>{timeTominute(this.props.trainDetailData.run_time_minute)}</p>
+                    </dd>
+                    <dd>
+                        <p> {this.props.trainDetailData.to_station_name}</p>
+                        <p className="timeFont">{this.props.trainDetailData.arrive_time}</p>
+                        <p>{this.props.trainDetailData.to_station_date} {dataToweek(this.props.trainDetailData.to_station_date)}</p>
+                    </dd>
+                </dl>
                 <div className="preNexDay">
-                    <span onClick={()=>this.npchange('pre', this.props.indexData.date)}>
-                        上一天
-                    </span>
+                        <span onClick={()=>this.npchange('pre', this.props.indexData.date)}>
+                            上一天
+                        </span>
                     <label htmlFor="detailDate">
                         {this.props.indexData.date} {dataToweek(this.props.indexData.date)}
                         <input type="date" className="date" value={this.props.indexData.date}
                                onChange={this.datechange.bind(this)}/>
                     </label>
                     <span onClick={()=>this.npchange('next', this.props.indexData.date)}>
-                        下一天
-                    </span>
+                            下一天
+                        </span>
                 </div>
-                <div>
-                    开始时间{this.props.trainDetailData.start_time}<br/>
-                    车次{this.props.trainDetailData.train_code}<br/>
-                    出发站{this.props.trainDetailData.from_station_name}<br/>
-                    到达站{this.props.trainDetailData.to_station_name}<br/>
-                    到达时间:{this.props.trainDetailData.arrive_time}<br/>
-                    运行时间: {timeTominute(this.props.trainDetailData.run_time_minute)}<br/>
-                    出发日期: {this.props.indexData.date}
-                    到达日期: {this.props.trainDetailData.to_station_date}
-                    <ul>
-                        {this.props.trainDetailData.ticketinfo.map((object, i) => {
-                            return <li key={i}>
-                                <div>
-                                    <dl>
-                                        <dd>{object.ticket_name}</dd>
-                                        <dd><span>¥{object.ticket_price}</span></dd>
-                                        <dd>{object.ticket_num}张</dd>
-                                        <dd><a className={object.ticket_num == 0 ? 'false' : 'true'} onClick={(e)=>this.goSubmitOrder(i)}>预定</a></dd>
-                                    </dl>
-                                </div>
-                            </li>
-                        })}
-                    </ul>
-                </div>
+                <ul className="ticketList">
+                    {this.props.trainDetailData.ticketinfo.map((object, i) => {
+                        return <li key={i}>
+                                <dl>
+                                    <dd>{object.ticket_name}</dd>
+                                    <dd><span>¥{object.ticket_price}</span></dd>
+                                    <dd>{object.ticket_num}张</dd>
+                                    {object.ticket_num == 0 ? <dd><span className="falseBtn">预定</span></dd> : <dd onClick={(e)=>this.goSubmitOrder(i)}><span className="trueBtn">预定</span></dd>}
+                                </dl>
+                        </li>
+                    })}
+                </ul>
             </div>
         );
     }
 
     componentDidMount() {
-        setTimeout(()=>{this.initDetail(this.props.indexData.date)},600)
+        setTimeout(()=> {
+            this.initDetail(this.props.indexData.date)
+        }, 600)
     }
 
     //上一天和下一天
@@ -102,8 +109,9 @@ class TrainDetail extends React.Component {
         }
         this.props.gettraindetail(parm);
     }
-    goSubmitOrder(e){
-        location.href=`#/ordersubmit/${e}`;
+
+    goSubmitOrder(e) {
+        location.href = `#/ordersubmit/${e}`;
     }
 }
 
