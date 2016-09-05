@@ -8,6 +8,8 @@ import {ajaxinitaddresslist} from '../actions/addresslist'
 import {choosestaion} from '../actions/index'
 import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
 
+import searchImage from '../images/search.png'
+
 class Choose extends React.Component {
     constructor(data, ajaxinitaddresslist, choosestaion) {
         super();
@@ -36,38 +38,42 @@ class Choose extends React.Component {
             }
         })
         return (
-            <div className="animatepage">
+            <div className="animatepage chooseAddress">
                 <Header title={this.title} back={this.back}/>
-                <input type="text" placeholder="输入中文/拼音/首字母" onChange={(e)=>this.filter(e)}/>
+                <div className="addressSearch">
+                    <label className="searchBox">
+                        <img src={searchImage} width='15'/>
+                        <input type="text" placeholder="输入中文/拼音/首字母" onChange={(e)=>this.filter(e)}/>
+                    </label>
+                </div>
                 <div className="addressListBody">
                     <ReactIScroll iScroll={iscroll} options={iscrollConfig()}>
                         <ul>
-                            <li id={this.state.inputVal.length > 0 ? '' : 'hide'}>
+                            <li id={this.state.inputVal.length > 0 ? '' : 'hide'} className="filterCity">
                                 <dl>
-                                    <dt>
-                                        搜索结果
-                                    </dt>
                                     {
                                         this.state.filterArr.map((object)=> {
-                                            return <dd onClick={()=> this.submit(object, this.type)}>
-                                                {object.cityName2}
+                                            return <dd onClick={()=> this.submit(object, this.type)} dangerouslySetInnerHTML={{__html:object.cityName2}}>
                                             </dd>;
                                         })}
                                 </dl>
+
                             </li>
-                            <li id={!this.state.inputVal.length > 0 ? '' : 'hide'}>
+                            <li id={!this.state.inputVal.length > 0 ? '' : 'hide'} className="hotCityBox">
                                 <dl>
                                     <dt>
                                         热门城市
                                     </dt>
                                     {hotCity.map((object, i) => {
                                         return <dd onClick={()=> this.submit(object, this.type)} key={i}>
-                                            {object.cityName}
+                                           <div>
+                                               {object.cityName}
+                                           </div>
                                         </dd>;
                                     })}
                                 </dl>
                             </li>
-                            <li id={!this.state.inputVal.length > 0 ? '' : 'hide'}>
+                            <li id={!this.state.inputVal.length > 0 ? '' : 'hide'} className="allCityBox">
                                 <dl>
                                     <dt>所有城市</dt>
                                     {this.props.data.addressList.map((object, i) => {
@@ -85,7 +91,7 @@ class Choose extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(()=>this.props.ajaxinitaddresslist(), 400)
+        setTimeout(()=>this.props.ajaxinitaddresslist(), 260)
     }
 
     filter(e) {

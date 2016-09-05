@@ -75,7 +75,7 @@ class TrainDetail extends React.Component {
     componentDidMount() {
         setTimeout(()=> {
             this.initDetail(this.props.indexData.date)
-        }, 600)
+        }, 260)
     }
 
     //上一天和下一天

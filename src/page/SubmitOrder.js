@@ -131,7 +131,7 @@ class SubmitOrder extends React.Component {
 
     componentDidMount() {
         if (!this.props.customerData.customerList.length > 0) {
-            setTimeout(()=>this.props.ajaxcustomerlist(), 400)
+            setTimeout(()=>this.props.ajaxcustomerlist(), 260)
         }
 
     }

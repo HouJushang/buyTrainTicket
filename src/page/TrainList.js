@@ -199,7 +199,7 @@ class TrainList extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(()=>this.initList(), 600)
+        setTimeout(()=>this.initList(), 260)
     }
 
     //初始化车次列表

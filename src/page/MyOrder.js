@@ -39,7 +39,7 @@ class Index extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(()=>this.props.ajaxinitmyorder(), 400)
+        setTimeout(()=>this.props.ajaxinitmyorder(), 260)
     }
 }
 
