@@ -8,10 +8,11 @@ import {ajaxcustomerlist, choosecustomer} from '../actions/customer'
 import {submitorder} from '../actions/order'
 import getNativePhone from '../native/getPhone'
 import dataToweek from '../utils/dateToWeek'
+import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
 import arrowImage from '../images/bigArrow.png'
 import warmImage from '../images/warm-icon.png'
 import addCustomerImage from '../images/addCustom.png'
-
+import delImage from '../images/choose-icon.png'
 
 class SubmitOrder extends React.Component {
     constructor() {
@@ -46,66 +47,84 @@ class SubmitOrder extends React.Component {
                         <p>{this.props.trainDetailData.to_station_date} {dataToweek(this.props.trainDetailData.to_station_date)}</p>
                     </dd>
                 </dl>
-                <div className="infoShow tr pr10 f12">
-                    <img src={warmImage} width={15} className="vm mr5"/>取票、退票、改签说明 >>
-                </div>
-                <dl className="ticketInfo">
-                    <dd>
-                        座位类型
-                    </dd>
-                    <dd>
-                        <p>{this.ticket.ticket_name}</p>
-                        <p>
-                            <span>￥</span>{this.ticket.ticket_price}
-                        </p>
-                    </dd>
-                    <dd></dd>
-                </dl>
-                <dl className="customerM">
-                    <dt>
-                        <img src={addCustomerImage} width='16'/>
-                        <Link to={`/choosecustomer`}>添加乘客</Link>
-                    </dt>
-                        {
-                            this.props.customerData.customerList.map((object, i) => {
-                                if (this.chooseArr.indexOf(object.id) > -1) {
-                                    return <dd key={i}>
-                                        <dl>
-                                            <dd onClick={(e)=>this.delCustomer(object.id)}>
-                                                删除
-                                            </dd>
-                                            <dd>
-                                                <p>
-                                                    <span>{object.passengerName}</span>
-                                                    <span>{object.passportName}</span>
-                                                </p>
-                                                <p>
+                <div className="submitBody">
+                    <ReactIScroll iScroll={iscroll} options={iscrollConfig()}>
+                        <div>
+
+
+                            <div className="infoShow tr pr10 f12">
+                                <img src={warmImage} width={15} className="vm mr5"/>取票、退票、改签说明 >>
+                            </div>
+                            <dl className="ticketInfo">
+                                <dd>
+                                    座位类型
+                                </dd>
+                                <dd>
+                                    <p>{this.ticket.ticket_name}</p>
+                                    <p>
+                                        <span>￥</span>{this.ticket.ticket_price}
+                                    </p>
+                                </dd>
+                                <dd></dd>
+                            </dl>
+                            <dl className="customerM">
+                                <dt>
+                                    <img src={addCustomerImage} width='16'/>
+                                    <Link to={`/choosecustomer`}>添加乘客</Link>
+                                </dt>
+                                {
+                                    this.props.customerData.customerList.map((object, i) => {
+                                        if (this.chooseArr.indexOf(object.id) > -1) {
+                                            return <dd key={i}>
+                                                <dl>
+                                                    <dd onClick={(e)=>this.delCustomer(object.id)}>
+                                                        <img src={delImage} width='20'/>
+                                                    </dd>
+                                                    <dd>
+                                                        <p>
+                                                            <span>{object.passengerName}</span>
+                                                            <span>{object.passportName}</span>
+                                                        </p>
+                                                        <p>
                                                     <span>
                                                         {object.ticketTypeName}
                                                     </span>
-                                                    <span>
+                                                            <span>
                                                         {object.passportNo}
                                                     </span>
-                                                </p>
+                                                        </p>
+                                                    </dd>
+                                                </dl>
                                             </dd>
-                                        </dl>
-                                    </dd>
+                                        }
+                                    })
                                 }
-                            })
-                        }
+                            </dl>
+                            <dl className="userInfo mt10">
+                                <dd><label htmlFor="submitName"><span>联系人:</span> <input type="text" id="submitName"
+                                                                                         placeholder="请输出联系人"
+                                                                                         onChange={(e)=>this.nameChange(e)}/></label>
+                                </dd>
+                                <dd><span>手机号:</span> <span>{this.phoneNo}</span></dd>
+                            </dl>
+                            <div className="buyTeaching">
+                                温馨提示:<br/>
+                                火车票无法保证100%出票，如出票失败将短信通知，退款将退回
+                                到您的付款账户，请你谅解。<br/>
+                                因铁路系统升级，无法保证100%在线改签，如在线申请失败，请
+                                前往火车站办理。
+                            </div>
+                        </div>
+                    </ReactIScroll>
+                </div>
+                <dl className="submitOrderFooter">
+                    <dd>
+                        共{this.chooseArr.length}人 总计￥{this.chooseArr.length * this.ticket.ticket_price}
+                    </dd>
+                    <dd onClick={()=>this.submit()} className={this.chooseArr.length > 0 ? 'trueBtn' : 'falseBtn'}>
+                        确认下单
+                    </dd>
                 </dl>
-                <div>
-                    联系人 <input type="text" onChange={(e)=>this.nameChange(e)}/><br/>
-                    手机号码: <span>{this.phoneNo}</span>
-                </div>
-                <div>
-                    温馨提示:火车票无法保证100%出票，如出票失败将短信通知，退款将退回到您的付款账户，请您谅解。
-                </div>
-
-                <div>
-                    共{this.chooseArr.length}人 总计{this.chooseArr.length * this.ticket.ticket_price}钱 <span
-                    onClick={()=>this.submit()}>确认下单</span>
-                </div>
             </div>
         );
     }
