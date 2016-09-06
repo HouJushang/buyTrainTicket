@@ -2,7 +2,7 @@
  * Created by hfcb on 16/8/17.
  */
 import 'whatwg-fetch'
-import {openloading,closeloading} from '../actions/loading'
+import {openloading, closeloading} from '../actions/loading'
 
 export default function (e) {
     return dispatch => {
@@ -33,6 +33,7 @@ export default function (e) {
             return response.json()
         }).then(function (response) {
             if (response.status == 'ok') {
+                console.log('fetchResponse' , response.data);
                 e.success(response.data)
             } else {
                 alert(response.msg);

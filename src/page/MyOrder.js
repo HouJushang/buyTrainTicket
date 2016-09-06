@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import Header from '../components/Header.js';
 import {ajaxinitmyorder} from '../actions/order'
-import {iscroll,ReactIScroll,iscrollConfig} from '../utils/iscroll'
+import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
 
 
 class Index extends React.Component {
@@ -17,23 +17,38 @@ class Index extends React.Component {
 
     render() {
         return (
-            <div className="animatepage indexPage">
+            <div className="animatepage myorderpage">
                 <Header title="我的订单"/>
-                <ReactIScroll iScroll={iscroll} options={iscrollConfig}>
-                <dl>
-                    <dt>未支付订单</dt>
-                    {this.props.data.list.notpayorderlist.map((item, i)=> {
-                        return <dd key={i}>
-                            {item.from_station_name} 去 {item.to_station_name}<br/>
-                            {item.pay_amt}<br/>
-                            {item.train_date} {item.train_time}开<br/>
-                            {item.checi}
-                            {item.passenger_name}
-                            {item.passenger_no}
-                        </dd>
-                    })}
-                </dl>
-                </ReactIScroll>
+                <div className="myorderBody">
+                    <ReactIScroll iScroll={iscroll} options={iscrollConfig}>
+                        <dl>
+                            <dt>未支付订单</dt>
+                            {this.props.data.list.notpayorderlist.map((item, i)=> {
+                                return <dd key={i}>
+                                    <div className="oh ddTop">
+                                        <div className="fl">
+                                            {item.from_station_name} 去 {item.to_station_name}<br/>
+                                            {item.train_date} {item.train_time}开<br/>
+                                            {item.checi}
+                                        </div>
+                                        <div className="fr">
+                                            ￥{item.pay_amt}
+                                            {item.STATUS}
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        {item.newpassengers.map((item2)=>{
+                                            return <li>
+                                                    {item2.passenger_name}
+                                                    {item2.passenger_no.substring(0,6)+"********"+item2.passenger_no.substring(item2.passenger_no.length-4)}
+                                            </li>
+                                        })}
+                                    </ul>
+                                </dd>
+                            })}
+                        </dl>
+                    </ReactIScroll>
+                </div>
             </div>
         );
     }

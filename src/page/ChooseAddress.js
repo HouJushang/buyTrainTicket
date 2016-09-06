@@ -117,7 +117,6 @@ class Choose extends React.Component {
                 inputVal: val
             })
         }, 300)
-
     }
 
     submit(obj, type) {
