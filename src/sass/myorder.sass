@@ -11,8 +11,35 @@
             border: 1px solid #d6d6d6
             border-radius: 5px
             -webkit-border-radius: 5px
+            &:last-child
+                margin-bottom: 0px
             .ddTop
-
+                .fr
+                    p
+                        &:first-child
+                            color: #ff7c00
+                            font-size: 16px
+                            span
+                                font-size: 12px
+                        &:last-child
+                            margin-top: 15px
+                            height: 28px
+                            line-height: 29px
+                            padding: 0 8px
+                            border-radius: 3px
+                            -webkit-border-radius: 3px
+                            &.close
+                                color: #fff
+                                background-color: #bdbdbd
+                            &.fail
+                                color: #fff
+                                background-color: red
+                            &.yellow
+                                color: #fff
+                                background-color: #ff7c00
+                            &.green
+                                color: #fff
+                                background-color: $themeColor
     .myorderBody
         position: absolute
         bottom: 0

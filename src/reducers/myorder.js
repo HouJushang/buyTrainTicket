@@ -2,7 +2,8 @@ import {ININMYORDER} from '../constants'
 
 const initialState = {
     list:{
-        notpayorderlist: []
+        notpayorderlist: [],
+        payorderlist: []
     },
 }
 

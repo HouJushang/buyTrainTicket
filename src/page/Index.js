@@ -98,7 +98,7 @@ class Index extends React.Component {
     }
 
     submit() {
-        window.location = '#/trainlist';
+        this.props.history.pushState(null, "/trainlist");
     }
 }
 export default connect(

@@ -4,19 +4,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {changepagetype} from '../actions/changeAnimate'
+import {browserHistory} from 'react-router'
+
 
 class Header extends React.Component {
     back(){
         this.props.changepagetype('left');
-        window.history.go(-1);
+        browserHistory.goBack();
         setTimeout(()=>{
             this.props.changepagetype('right')
-        },400)
+        },100)
     }
     render() {
         return (
             <header>
-                <span className="backBtn" onClick={this.back.bind(this)}>
+                <span className="backBtn" onClick={()=>this.back()}>
                 </span>
                 {this.props.title}
             </header>
