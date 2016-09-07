@@ -22,7 +22,6 @@ export default function (e) {
             },
             body: JSON.stringify(parm)
         }).then(function (response) {
-            dispatch(closeloading());
             if (response.status >= 200 && response.status < 300) {
                 return response
             } else {
@@ -34,10 +33,19 @@ export default function (e) {
             return response.json()
         }).then(function (response) {
             if (response.status == 'ok') {
+                dispatch(closeloading());
                 console.log('fetchResponse' , response.data);
                 e.success(response.data)
             } else {
-                alert(response.msg);
+                setTimeout(()=>{
+                    dispatch(openloading(response.msg))
+                })
+                setTimeout(()=>{
+                    dispatch(closeloading())
+                },1000)
+                if(typeof e.error == 'function'){
+                    e.error();
+                }
             }
         });
     }

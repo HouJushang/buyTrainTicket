@@ -20,10 +20,7 @@ import TrainDetail from './page/TrainDetail.js'
 import SubmitOrder from './page/SubmitOrder.js'
 import ChooseCustomer from './page/ChooseCustomer.js'
 import MyOrder from './page/MyOrder.js'
-
-
-//dev
-import Dev from './components/DevTools'
+import './utils/windowEvent'
 
 //style
 import './sass/main.sass'
@@ -38,7 +35,7 @@ const reducer = combineReducers({
 
 const store = createStore(
     reducer,
-    Dev.instrument(),
+    // Dev.instrument(),
     applyMiddleware(thunk)
 )
 const history = syncHistoryWithStore(hashHistory, store)

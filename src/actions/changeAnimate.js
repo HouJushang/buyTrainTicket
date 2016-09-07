@@ -17,6 +17,5 @@ export function pageback() {
         setTimeout(()=> {
             return dispatch(changepagetype('right'))
         }, 260)
-
     }
 }

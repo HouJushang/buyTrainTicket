@@ -4,8 +4,6 @@
 import {INITTRAINLIST, TYPESUBMIT, OPTIONSUBMIT} from '../constants'
 
 import request from '../utils/fetch'
-
-
 //初始化火车列表
 export function inittrainlist(arr) {
     return {
@@ -24,9 +22,12 @@ export function ajaxinittrainlist(e) {
                 to: e.to
             },
             font: '获取车次中...',
-            success: function (result) {
+            success (result) {
                 console.log(result);
                 return dispatch(inittrainlist(result));
+            },
+            error(){
+                return dispatch(inittrainlist({available_tickets:[],to_station_data:[],from_station_data:[]}))
             }
         }))
     }
