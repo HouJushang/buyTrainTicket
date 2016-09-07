@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Header from '../components/Header.js';
 import {ajaxinitmyorder} from '../actions/order'
 import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
+import {pageback} from '../actions/changeAnimate'
 
 
 class Index extends React.Component {
@@ -24,8 +25,8 @@ class Index extends React.Component {
                         <div>
                             <dl>
                                 <dt>未支付订单</dt>
-                                {this.props.data.list.notpayorderlist.map((item, i)=> {
-                                    return <dd key={i}>
+                                {this.props.data.list.notpayorderlist.map((item)=> {
+                                    return <dd>
                                         <div className="oh ddTop">
                                             <div className="fl">
                                                 {item.from_station_name} 去 {item.to_station_name}<br/>
@@ -59,8 +60,8 @@ class Index extends React.Component {
                             </dl>
                             <dl>
                                 <dt>已支付订单</dt>
-                                {this.props.data.list.payorderlist.map((item, i)=> {
-                                    return <dd key={i}>
+                                {this.props.data.list.payorderlist.map((item)=> {
+                                    return <dd>
                                         <div className="oh ddTop">
                                             <div className="fl">
                                                 {item.from_station_name} 去 {item.to_station_name}<br/>
@@ -98,7 +99,6 @@ class Index extends React.Component {
                                 })}
                             </dl>
                         </div>
-
                     </ReactIScroll>
                 </div>
             </div>

@@ -4,21 +4,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {changepagetype} from '../actions/changeAnimate'
-import {browserHistory} from 'react-router'
+import {pageback} from '../actions/changeAnimate'
 
 
 class Header extends React.Component {
-    back(){
-        this.props.changepagetype('left');
-        browserHistory.goBack();
-        setTimeout(()=>{
-            this.props.changepagetype('right')
-        },100)
-    }
+
     render() {
         return (
             <header>
-                <span className="backBtn" onClick={()=>this.back()}>
+                <span className="backBtn" onClick={this.props.pageback}>
                 </span>
                 {this.props.title}
             </header>
@@ -31,5 +25,5 @@ Header.defaultProps = {
 };
 export default connect(
     state => ({changeanimate: state.changeanimate}),
-    {changepagetype}
+    {changepagetype,pageback}
 )(Header)
