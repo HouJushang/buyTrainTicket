@@ -3,12 +3,10 @@
  */
 import 'whatwg-fetch'
 import {openloading, closeloading} from '../actions/loading'
-import {changepagetype} from '../actions/changeAnimate'
 
 export default function (e) {
     return dispatch => {
         if (e.font) {
-            // dispatch(changepagetype('left'))
             dispatch(openloading(e.font));
         }
         var parm = e.data || {};
@@ -34,7 +32,6 @@ export default function (e) {
         }).then(function (response) {
             if (response.status == 'ok') {
                 dispatch(closeloading());
-                console.log('fetchResponse' , response.data);
                 e.success(response.data)
             } else {
                 setTimeout(()=>{

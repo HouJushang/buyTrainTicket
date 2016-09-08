@@ -11,7 +11,7 @@ import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
 import searchImage from '../images/search.png'
 
 class Choose extends React.Component {
-    constructor(data, ajaxinitaddresslist, choosestaion) {
+    constructor(data) {
         super();
         this.data = data;
     }
@@ -106,7 +106,7 @@ class Choose extends React.Component {
                     if (cityIndex > -1) {
                         let leftCityName = item.cityName.substring(0, cityIndex);
                         let rightCityName = item.cityName.substring(cityIndex + val.length);
-                        let cityName2 = leftCityName + "<span>" + val + "</span>" + rightCityName;
+                        let cityName2 = leftCityName + '<span>' + val + '</span>' + rightCityName;
                         item.cityName2 = cityName2
                     }
                     newArr.push(item);

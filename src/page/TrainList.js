@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {browserHistory} from 'react-router'
 import Header from '../components/Header.js';
 
 import {ajaxinittrainlist, typesubmit, optionsubmit} from '../actions/trainlist'
@@ -19,6 +18,7 @@ class TrainList extends React.Component {
         super();
         this.title = '车次列表'
     }
+
     componentWillMount() {
         this.state = {
             trainTypeCheckbox: this.props.data.trainTypeCheckboxRel.slice(),
@@ -29,6 +29,7 @@ class TrainList extends React.Component {
             optionPopup: false
         }
     }
+
     render() {
         return (
             <div className="animatepage trainlistPage">
@@ -51,7 +52,7 @@ class TrainList extends React.Component {
                     <ReactIScroll iScroll={iscroll} options={iscrollConfig()}>
                         <ul className="trainlist-ul">
                             {this.props.data.trainListFilter.map((object, i) => {
-                                return <li onClick={(e)=>this.toDetail(object.train_code)} key={i}>
+                                return <li onClick={()=>this.toDetail(object.train_code)} key={i}>
                                     <dl>
                                         <dd>
                                             <p className="startfont">{object.start_time}</p>
@@ -61,12 +62,15 @@ class TrainList extends React.Component {
                                             {object.train_code}
                                         </dd>
                                         <dd>
-                                            {object.from_station_name === object.start_station_name ?
+                                            <p>{object.from_station_name === object.start_station_name ?
                                                 <span className="start">始</span> : <span className="middle">过</span>}
-                                            {object.from_station_name}<br/>
-                                            {object.end_station_name === object.to_station_name ?
-                                                <span className="end">终</span> : <span className="middle">过</span>}
-                                            {object.to_station_name}<br/>
+                                                {object.from_station_name}
+                                            </p>
+                                            <p>
+                                                {object.end_station_name === object.to_station_name ?
+                                                    <span className="end">终</span> : <span className="middle">过</span>}
+                                                {object.to_station_name}
+                                            </p>
                                         </dd>
                                         <dd>
                                             <p>{object.run_time}</p>

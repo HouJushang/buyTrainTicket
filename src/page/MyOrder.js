@@ -1,32 +1,32 @@
 import React from 'react';
-import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import Header from '../components/Header.js';
 import {ajaxinitmyorder} from '../actions/order'
 import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
-import {pageback} from '../actions/changeAnimate'
 
 
-class Index extends React.Component {
+class MyOrder extends React.Component {
     constructor() {
         super()
     }
+
     componentWillMount() {
         this.state = {
             orderState: ['待处理', '已关闭', '未支付', '待出票', '已出票', '出票失败', '正在退票', '已退票', '退票失败']
         }
     }
+
     render() {
         return (
             <div className="animatepage myorderpage">
                 <Header title="我的订单"/>
                 <div className="myorderBody">
-                    <ReactIScroll iScroll={iscroll} options={iscrollConfig}>
+                    <ReactIScroll iScroll={iscroll} options={iscrollConfig()}>
                         <div>
                             <dl>
                                 <dt>未支付订单</dt>
-                                {this.props.data.list.notpayorderlist.map((item)=> {
-                                    return <dd>
+                                {this.props.data.notpayorderlist.map((item)=> {
+                                    return <dd onClick={(e)=>this.goDetail(item.orderId)}>
                                         <div className="oh ddTop">
                                             <div className="fl">
                                                 {item.from_station_name} 去 {item.to_station_name}<br/>
@@ -36,7 +36,7 @@ class Index extends React.Component {
                                             <div className="fr">
                                                 <p><span>￥</span>{item.pay_amt}</p>
                                                 {
-                                                    [0,1].indexOf(parseInt(item.STATUS)) > -1 ? <p className="close">
+                                                    [0, 1].indexOf(parseInt(item.STATUS)) > -1 ? <p className="close">
                                                         {this.state.orderState[item.STATUS]}
                                                     </p> : ''
                                                 }
@@ -60,7 +60,7 @@ class Index extends React.Component {
                             </dl>
                             <dl>
                                 <dt>已支付订单</dt>
-                                {this.props.data.list.payorderlist.map((item)=> {
+                                {this.props.data.payorderlist.map((item)=> {
                                     return <dd>
                                         <div className="oh ddTop">
                                             <div className="fl">
@@ -71,9 +71,10 @@ class Index extends React.Component {
                                             <div className="fr">
                                                 ￥{item.pay_amt}
                                                 {
-                                                    [3,5,6,7,8].indexOf(parseInt(item.STATUS)) > -1 ? <p className="close">
-                                                        {this.state.orderState[item.STATUS]}
-                                                    </p> : ''
+                                                    [3, 5, 6, 7, 8].indexOf(parseInt(item.STATUS)) > -1 ?
+                                                        <p className="close">
+                                                            {this.state.orderState[item.STATUS]}
+                                                        </p> : ''
                                                 }
                                                 {
                                                     item.STATUS == 4 ? <p className="green">
@@ -104,12 +105,16 @@ class Index extends React.Component {
             </div>
         );
     }
+
     componentDidMount() {
-        setTimeout(()=>this.props.ajaxinitmyorder(), 260)
+        setTimeout(()=>this.props.ajaxinitmyorder(), 260);
+    }
+    goDetail(orderNo) {
+        this.props.history.pushState(null, `/orderDetail/${orderNo}`);
     }
 }
 
 export default connect(
-    state => ({data: state.myorder}), {ajaxinitmyorder}
-)(Index)
+    state => ({data: state.myorder.list}), {ajaxinitmyorder}
+)(MyOrder)
 

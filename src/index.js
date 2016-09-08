@@ -20,7 +20,7 @@ import TrainDetail from './page/TrainDetail.js'
 import SubmitOrder from './page/SubmitOrder.js'
 import ChooseCustomer from './page/ChooseCustomer.js'
 import MyOrder from './page/MyOrder.js'
-import './utils/windowEvent'
+import orderDetail from './page/orderDetail'
 
 //style
 import './sass/main.sass'
@@ -69,6 +69,7 @@ ReactDOM.render(
                     <Route path="traindetail/:traincode" component={TrainDetail}></Route>
                     <Route path="ordersubmit/:type" component={SubmitOrder}></Route>
                     <Route path="choosecustomer" component={ChooseCustomer}></Route>
+                    <Route path="orderdetail/:orderId" component={orderDetail}></Route>
                 </Route>
             </Router>
         </div>

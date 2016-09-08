@@ -1,10 +1,16 @@
 import request from '../utils/fetch'
-import {ININMYORDER} from '../constants'
+import {ININMYORDER,INITORDERDETAIL} from '../constants'
 import phoneNo from '../native/getPhone'
 export function initmyorder(list){
     return {
         type: ININMYORDER,
         list: list
+    }
+}
+export function initorderdetail(detail) {
+    return {
+        type: INITORDERDETAIL,
+        detail: detail
     }
 }
 export function ajaxinitmyorder() {
@@ -21,6 +27,20 @@ export function ajaxinitmyorder() {
         }))
     }
 }
+export function ajaxorderdetail(orderId) {
+    return (dispatch) => {
+        dispatch(request({
+            url: 'getTicketOrderDetail',
+            data: {
+                orderId: orderId
+            },
+            font: '获取订单详情中...',
+            success: function (result) {
+                return dispatch(initorderdetail(result));
+            }
+        }))
+    }
+}
 export function submitorder(e) {
     return (dispatch) => {
         dispatch(request({
@@ -33,3 +53,4 @@ export function submitorder(e) {
         }))
     }
 }
+
