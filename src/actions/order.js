@@ -41,14 +41,14 @@ export function ajaxorderdetail(orderId) {
         }))
     }
 }
-export function submitorder(e) {
+export function submitorder(e,successFn) {
     return (dispatch) => {
         dispatch(request({
             url: 'submitTicketOrder',
             data: e,
             font: '提交订单...',
             success: function (result) {
-                console.log(result);
+                successFn();
             }
         }))
     }

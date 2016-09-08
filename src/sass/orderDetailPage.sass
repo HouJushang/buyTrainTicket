@@ -1,4 +1,10 @@
 .orderDetailPage
+    .orderDetailBody
+        position: absolute
+        top: $headerHeight
+        bottom: 46px
+        left: 0
+        right: 0
     .orderDetailBox
         margin: 0 15px 15px 15px
     .buyInfo
@@ -44,3 +50,28 @@
             li
                 overflow: hidden
                 margin-bottom: 6px
+    .orderCancel
+        height: 45px
+        line-height: 46px
+        text-align: center
+        background-color: #fff
+        @include borb
+        @include bort
+        font-size: 16px
+        color: $themeColor
+    .buyInfo2
+        padding: 10px
+        line-height: 1.5
+        color: #7c7c7c
+        font-size: 12px
+    .nowPay
+        font-size: 16px
+        background-color: #fd9431
+        color: #fff
+        height: 45px
+        line-height: 46px
+        position: fixed
+        bottom: 0px
+        left: 0px
+        right: 0px
+        text-align: center

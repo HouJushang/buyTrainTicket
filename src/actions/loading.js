@@ -11,11 +11,11 @@ export function closeloading() {
         type: CLOSTLOADING,
     }
 }
-export function alert(e) {
+export function popupMes(e) {
     return (dispatch) => {
         dispatch(openloading(e));
         setTimeout(()=> {
             return dispatch(closeloading())
-        }, 200)
+        }, 1500)
     }
 }

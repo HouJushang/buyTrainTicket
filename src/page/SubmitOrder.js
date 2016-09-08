@@ -175,7 +175,9 @@ class SubmitOrder extends React.Component {
             train_time: this.detail.start_time,
         }
         //todo 订单成功,提示信息内容,然后跳转我的订单页面
-        this.props.submitorder(parm);
+        this.props.submitorder(parm,()=>{
+            this.props.history.pushState(null, '/myorder');
+        })
     }
 }
 

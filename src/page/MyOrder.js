@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Header from '../components/Header.js';
 import {ajaxinitmyorder} from '../actions/order'
 import {iscroll, ReactIScroll, iscrollConfig} from '../utils/iscroll'
+import {popupMes} from '../actions/loading'
 
 
 class MyOrder extends React.Component {
@@ -26,7 +27,7 @@ class MyOrder extends React.Component {
                             <dl>
                                 <dt>未支付订单</dt>
                                 {this.props.data.notpayorderlist.map((item)=> {
-                                    return <dd onClick={(e)=>this.goDetail(item.orderId)}>
+                                    return <dd onClick={()=>this.goDetail(item.orderId,item.STATUS)}>
                                         <div className="oh ddTop">
                                             <div className="fl">
                                                 {item.from_station_name} 去 {item.to_station_name}<br/>
@@ -109,12 +110,16 @@ class MyOrder extends React.Component {
     componentDidMount() {
         setTimeout(()=>this.props.ajaxinitmyorder(), 260);
     }
-    goDetail(orderNo) {
+    goDetail(orderNo,status) {
+        if(status == 0){
+            this.props.popupMes('订单正在处理中...')
+            return
+        }
         this.props.history.pushState(null, `/orderDetail/${orderNo}`);
     }
 }
 
 export default connect(
-    state => ({data: state.myorder.list}), {ajaxinitmyorder}
+    state => ({data: state.myorder.list}), {ajaxinitmyorder,popupMes}
 )(MyOrder)
 
