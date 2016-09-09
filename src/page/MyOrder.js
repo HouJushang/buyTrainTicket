@@ -20,9 +20,9 @@ class MyOrder extends React.Component {
     render() {
         return (
             <div className="animatepage myorderpage">
-                <Header title="我的订单"/>
+                <Header title="我的订单" />
                 <div className="myorderBody">
-                    <ReactIScroll iScroll={iscroll} options={iscrollConfig()}>
+                    <ReactIScroll iScroll={iscroll} options={iscrollConfig()} onScroll={this.onScroll}>
                         <div>
                             <dl>
                                 <dt>未支付订单</dt>
@@ -62,7 +62,7 @@ class MyOrder extends React.Component {
                             <dl>
                                 <dt>已支付订单</dt>
                                 {this.props.data.payorderlist.map((item)=> {
-                                    return <dd>
+                                    return <dd onClick={()=>this.goDetail(item.orderId,item.STATUS)}>
                                         <div className="oh ddTop">
                                             <div className="fl">
                                                 {item.from_station_name} 去 {item.to_station_name}<br/>
@@ -72,7 +72,7 @@ class MyOrder extends React.Component {
                                             <div className="fr">
                                                 ￥{item.pay_amt}
                                                 {
-                                                    [3, 5, 6, 7, 8].indexOf(parseInt(item.STATUS)) > -1 ?
+                                                    [3, 5, 6, 7].indexOf(parseInt(item.STATUS)) > -1 ?
                                                         <p className="close">
                                                             {this.state.orderState[item.STATUS]}
                                                         </p> : ''
@@ -83,7 +83,7 @@ class MyOrder extends React.Component {
                                                     </p> : ''
                                                 }
                                                 {
-                                                    item.STATUS == 5 ? <p className="fail">
+                                                    item.STATUS == 5 || item.STATUS == 8 ? <p className="fail">
                                                         {this.state.orderState[item.STATUS]}
                                                     </p> : ''
                                                 }
@@ -111,11 +111,14 @@ class MyOrder extends React.Component {
         setTimeout(()=>this.props.ajaxinitmyorder(), 260);
     }
     goDetail(orderNo,status) {
-        if(status == 0){
-            this.props.popupMes('订单正在处理中...')
+        if(status == 0 || status == 3 || status == 6){
+            this.props.popupMes('该订单无法查看详情')
             return
         }
         this.props.history.pushState(null, `/orderDetail/${orderNo}`);
+    }
+    onScroll(e){
+        alert(1);
     }
 }
 

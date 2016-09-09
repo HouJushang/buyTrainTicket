@@ -1,6 +1,6 @@
 {
   "generator-react-webpack": {
-    "appName": "buyTrainTicket",
+    "appName": "myNewProject",
     "style": "sass",
     "postcss": false,
     "generatedWithVersion": 3

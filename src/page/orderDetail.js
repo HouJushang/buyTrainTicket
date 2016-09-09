@@ -83,6 +83,11 @@ class orderDetail extends React.Component {
                                     取消订单
                                 </div> : ''
                             }
+                            {
+                                this.props.orderDetail.status == 24 ?  <div className="orderCancel" onClick={()=>this.backTicket()}>
+                                    退票
+                                </div> : ''
+                            }
                             <div className="buyInfo2">
                                 请在{this.props.orderDetail.hintpaytime}分钟内完成网上支付，逾期未支付，系统将取消本次交易。在完成支付或者取消该清单之前，您将无法购买其他车票。<br/>
                                 改签后新票票价低于原票价的，票价差额按银行规定时限退回原银行卡。
@@ -111,6 +116,9 @@ class orderDetail extends React.Component {
                 pageBack();
             }
         })
+    }
+    backTicket(){
+        alert(1);
     }
     componentDidMount() {
         setTimeout(()=> {
